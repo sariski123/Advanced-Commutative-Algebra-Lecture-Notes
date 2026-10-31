@@ -1,0 +1,68 @@
+
+    \chapter{Lenguaje de puntos y funtor de puntos} \justifying
+    Sea $k$ un anillo, consideremos las ecuaciones $p_1(x_1,\ldots, x_n) = 0, \ldots, p_r(x_1,\ldots, x_n) = 0$, que forman un sistema $S$ siendo los $p_i \in k[x_1, \ldots, x_n]$ (puede haber infinitas variabples y ecuaciones).
+
+    \begin{defi}
+        Llamamos soluciones del sistema $$S(A) \coloneqq \{(a_1,\ldots , a_n) \in A\times \cdots \times A \, / \, p_1(a_1,\ldots , a_n) = \cdots = p_r (a_1,\ldots , a_n)=0\}$$
+        siendo $k \hookrightarrow A$ una $k$-\'algebra extensi\'on de $k$. 
+    \end{defi}
+    \begin{obs}
+        Dado un morfismo de $k$-\'algebras (lineal) $f: A \longrightarrow B$, $S(A) \longrightarrow S(B)$, es decir, si interpretamos $A$ como elementos en $B$, las soluciones en $A$ dan soluciones en $B$, pues si $(a_1,\ldots , a_n)$ son soluciones, $(f(a_1), \ldots, f(a_n))$ son soluciones en $B$. 
+
+        El espacio es (un funtor)
+        $$\bt X: \mc C_{k-alg} \rar & Conj \\[-5mm] A \rarmaps & X(A) \\[-5mm] f: A\to B \rarmaps & f_X : X_S(A) \to X_S(B) \et$$
+        es decir, dar un espacio es dar sus puntos.
+
+        De forma que el espacio $X_S(A)$ es el espacio de soluciones con coordenadas en $A$, es decir, $\{(a_1, \ldots, a_n)\in A \, / \, p_i (a_1, \ldots, a_n) = 0 \}$ y basta que $A$ sea una $k$-\'algebra. Comprobar que es funtorial, que $(g\circ f) \to (g\circ f)_{X_S}$ y para la identidad.
+    \end{obs}
+
+    Toda $k$-\'algebra (anillo $A$) define un espacio, dado $\mc A = k[x_1, \ldots, x_n]/(p_1, \ldots, p_r)$, $Hom_k(\mc A, A) = Hom_k(k[x_1, \ldots, x_n]/(p_1, \ldots, p_r),A) = X_S$ y se tiene 
+    $$\bt k[x_1, \ldots, x_n] \rar \arrow{dr}{p} & k[x_1, \ldots, x_n]/(p_1, \ldots, p_r) \arrow{d} \\ & A \et$$
+    siendo $p$ el morfismo tomar valor en $(a_1,\ldots, a_n)$, y $p_i(x_1, \ldots ,x_n) \longmapsto p_i(a_1, \ldots, a_n) = 0 $, son las solciones.
+
+    Por tanto, $X_{\mc A}(A) = Hom_{k-alg}(\mc A, A)$. Dado un $f: A \longrightarrow A'$, con $f_*$ se tiene para otra $k$-\'algebra.
+
+    Y toda $k$-\'algebra es de la forma $\mc A$, pues toda $k$-\'algebra tiene sistema de generadores, eventualmente infinito, pero todos sus elementos generan, $A= k[\xi_i]_{i \in I} = k[x_i]/ (p_i)$ con la s.e.
+    $$\bt 0 \rar & I \rar & k[x_i] \rar & k[\xi_i] =A\rar & 0 \et$$
+
+    Veamos que si las soluciones de dos sistemas (en distintas variables) se corresponde biun\'ivocamente, las \'algebras asociadas son isomorfas. Dado un espacio $X$, para cada anillo damos un conjunto. Como una funci\'on en $X$ conjunto es $X(A) \to k$, para $X$ espacio una funci\'on es $X(A) \to A$, dar para cada punto un n\'umero. 
+
+    Consideremos el espacio $\kk (A)=A$ como conjunto, que es la recta, generalizada. Entonces una funci\'on es $f: X \longrightarrow \kk$, que para cada $A$ es $f_A : X(A) \longrightarrow \kk (A)$. Dado un morfismo $h: A \longrightarrow A'$ ($h: \kk(A) \longrightarrow \kk(A')$), se tiene
+    $$\bt X(A) \rar{f_A} \arrow{d}{h_X} & \kk(A) \arrow{d}{h_{\kk}} \\ X(A') \rar{f_{A'}} & \kk(A') \et$$
+
+    Sabemos que 
+    $$X_S(A)= \text{soluciones del sistema con coordenadas en } A = Hom_{k-alg}(k[x_1,\ldots, x_n] \ (p_i) = \mc A, A)$$
+    entonces como $(f+f')(p_A) = f(p_A) + f'(p_A)$, con producto y multiplicaci\'on por constantes, entonces $F(X_S)$ es tambi\'en una $k$-\'algebra $\simeq \mc A$. El espacio determina el anillo, porque las funciones es el propio anillo. Siendo
+    $$\bt \mc A \rar{\simeq} & F(X_S) \\[-5mm] p(\xi_1, \ldots, \xi_n) \rarmaps & (p_1(\xi_1,\ldots, \xi_n), \ldots, ) \arrow[equal]{d}  \\[-5mm] p(x_1,\ldots, x_n) \mod p_i \rarmaps & (p(x_1,\ldots, x_n) )((a_1, \ldots, a_n)) &[-13mm] \coloneqq p(a_1, \ldots, a_n) \in A \et$$
+    y esta definici\'on no depende del respresentante elegido, eligiendo combinaci\'on lineal de las $p$ est\'an  tambi\'en en $A$. 
+
+    Entonces podremos recuperar para cada $f=p(\xi_1, \ldots, \xi_n)$. Podemos elegir el punto $(\xi_1, \ldots, \xi_n)$ tautol\'ogico, y $X_S(\mc A) \overset{f_A}{\longrightarrow} \mc A$, de forma que asignamos $p_{tauto} \longmapsto f(p_{tauto})$
+
+    Y todo este espacio es el espacio espectro de $\mc A$. Como $A =k[x_1, \ldots, x_n] / (p_i)$, el espacio espectro $\mathscr Esp(A)$ son las soluciones de los $p_i$.
+
+    Consideremos ahora el conjunto $Spec\, A$ el espectro usual. Si $(\lambda_1, \ldots, \lambda_n) \in k^n, \, p_i(\lambda_1, \ldots \lambda_n) = 0$. Dado un morfismo entre cuerpos $k \hookrightarrow k'$ que es obligatoriamente inyectivo ($\ker$ es un ideal y el \'unico ideal de un cuerpo es el 0). Entonces podemos identificar la soluci\'on $(\lambda_1, \ldots, \lambda_n)\subset k'^n$, y diremos que $(\lambda_1, \ldots, \lambda_n) \in k^n$ y $(\mu_1, \ldots, \mu_n) \in \bar k^n$, son la misma si lo son en $\Sigma^n$, con $k \hookrightarrow \Sigma, \bar k \hookrightarrow \Sigma$. 
+
+    De esta forma, vamos a ver que $\mathscr Esp(A) = $ primos de $A$. Se tiene el paso al cuerpo residual
+    $$\bt \modulo{k[x_1, \ldots, x_n]}{(p_i)} = A \rar{\pi} & \modulo{A_\p}{\p A_\p} = k(\p) \\[-5mm] a \rarmaps & \bar a \\[-5mm] x_i\rarmaps & \lambda_i \\[-5mm] 0 = p_i(x_1, \ldots, x_n) \rarmaps & p_i(\lambda_1, \ldots, \lambda_n)=0     \et$$
+    pensamos los puntos como morfismos $p: A \longrightarrow k$, y llamando $\p = \ker p$, y $p$ factoriza
+    $$\bt A \rar{p} \arrow{dr} & k \\ & \modulo{A}{\p} \arrow[hook]{u}   \et$$
+    y $ \modulo{A}{\p}$ es \'integro, luego $\p$ es primo, y podemos hacer la factorizaci\'on por el cuerpo residual
+    $$\bt A \rar{p} \arrow{dr} & k  & \arrow[hook]{l} \left(\modulo{A}{\p}\right)_\p = k(\p)\\ & \modulo{A}{\p} \arrow[hook]{u} \arrow{ru}   \et$$
+    y entonces
+    $$\bt A \rar{p} \arrow{dr} & k \\ & k(\p) \arrow[hook]{u}   \et$$
+    y cada punto se corresponde con uno del cuerpo residual.
+    \begin{ejem}
+        Si consideramos $x^2+1=0$ en $\bb R = k$, y hacemos $A = \modulo{\bb R[x]}{x^2+1}$, tenemos dos morfismos $A \longrightarrow \bb C$, para cada ra\'iz $i$ y $-i$, pero en verdad son el mismo pues difieren en el automorfismo de conjugar. 
+    \end{ejem}
+
+
+    Además, $Spec(A_1\underset{k}{\otimes} A_2)$ se suele definir como $Spec\, A_1 \times Spec \, A_2$, pero no es cierto en espacios, aunque s\'i existe un morfismo $Spec(A_1\underset{k}{\otimes} A_2) \longrightarrow Spec\, A_1 \times Spec \, A_2$, no es isomorfismo. 
+    \begin{dem}
+        Sea $A_1=k[x], \, A_2 = k[y]$, $A_1 \underset{k}{\otimes} A_2 =k[x,y]$ tiene por espectro los primos, que son $p(x,y)$ irreducibles, $p(x,y)\cdot  k[x,y]$ es un ideal primo y cortamos con $k[x]$, $k[x]\cap p(x,y) k[x,y] = 0$ pues no es m\'ultiplo de $x$ s\'olamente. $x+y$ tambi\'en es irreducible.
+    \end{dem}
+
+    Dar un morfismo $Spec \, A_1 \longrightarrow Spec\, A_2$ es dar una correspondencia entre las solucioes, y es lo mismo que dar $A_2 \longrightarrow A_1$, porque $$A_1 = k[\xi_1, \ldots, \xi_n] = k[x_1, \ldots, x_n] / (p_i)$$
+    $$A_2 =  k[\bar \xi_1, \ldots,\bar  \xi_n] = k[y_1, \ldots, y_n] / (q_j)$$
+    y $(\xi_1, \ldots, \xi_n)$ un punto con coordenadas en $A_1$, se corresponde con $\longmapsto (c_1, \ldots, c_m)$ con coordenadas en $A_1$. Entonces se coge el morfismo que manda $\bar \xi_i \longmapsto c_i$, de forma que 
+    $$\bt A_2 \rar & A_1 \\[-5mm] \bar \xi_i \rarmaps & c_i \\[-5mm] Q_j(y_1, \ldots, y_m) \rarmaps & Q_j(c_1, \ldots, c_m) =0 \et$$
+    y cada morfismo $A_1 \to B$ define un $A_2 \to B$, y es el mismo porque coinciden sobre el punto general. 

@@ -1,0 +1,852 @@
+ 
+\chapter{Morfismos finitos y dependencia entera}\justifying 
+
+Sea $k$ un cuerpo y $k \to A$ una $k$-álgebra. Hay un morfismo asociado $Spec\, A \longrightarrow Spec\,  k = \{ * \}$. 
+\textquestiondown Cuándo es $Spec A$ finito? Cuando $A$ es una $k$-álgebra finita (por ejemplo, tiene dimensión finita como espacio vectorial). En este caso, la topología es la discreta (ningún primo contiene a otro; todos son maximales).
+\section{Morfismos finitos}
+\begin{defi}
+    Un morfismo de anillos $f: A \to B$ se dice \textbf{finito} cuando $B$ es un $A$-módulo finitamente generado, es decir, $B$ es una $A$-\'algebra finita. 
+\end{defi}
+Dado un ideal primo $\p \subseteq A$, \textquestiondown cómo es la fibra $(f^*)^{-1}(\p)$ bajo el morfismo inducido $f^*: Spec B \to Spec A$?.
+
+\noindent \textbf{Fibra de $\mathfrak{p}$:} Como $B$ es un $A$-módulo, consideramos la localización y cociente $B_{\p} / \p B_{\p}$. Resulta que:
+$$Spec(B_{\p} / \p B_{\p}) \hookrightarrow Spec B$$
+y la imagen es el conjunto $\{\bar \p \in Spec B / f^{-1}(\bar \p) = \mathfrak{p}\}$. Por lo tanto, la fibra se identifica como:
+$$(f^*)^{-1}(\mathfrak{p}) \simeq Spec(B_{\p} / \p B_{\p}) \cong Spec(B \underset{A}{\otimes}\kk (\mathfrak{p})) \text{}$$
+Donde $\kk (\mathfrak{p})$ es el cuerpo residual de $A$ en $\mathfrak{p}$.
+
+Hay un diagrama conmutativo de cambios de base:
+\begin{center}
+\begin{tikzcd}
+Spec(B \underset{A}{\otimes}\kk (\mathfrak{p})) \arrow[r] \arrow[d] & Spec B \arrow[d, "f^*"] \\[5mm]
+Spec(\kk (\mathfrak{p})) \arrow[r, hook] & Spec A
+\end{tikzcd}
+\end{center}
+
+Como el cambio de base mantiene la finitud, si $A \to B$ es finito, entonces $\kk (\p) \to B \underset{A}{\otimes}\kk (\p)$ también es finito. Al ser $B \underset{A}{\otimes}\kk (\mathfrak{p})$ una $\kk(\mathfrak{p})$-álgebra finita, su espectro (la fibra) es un conjunto discreto y finito.
+\begin{defi}
+    Sea $f: A \to B$ un morfismo y $B$ una $A$-álgebra. Un elemento $b \in B$ es \textbf{entero sobre $A$} cuando $b$ verifica una ecuación polinómica en $A[x]$ mónico, es decir, 
+    $$\exists \,  p(x) \in A[x] \text{ mónico tal que } p(b) = 0 $$
+\end{defi}
+\begin{propis}
+\begin{enumerate}
+    \item Si $f: A \to B$ es finito, entonces sus fibras son finitas y discretas. (demostraci\'on arriba)
+    \item Si $f$ es inyectivo, entonces $f^* : Spec\, B \longrightarrow Spec \, A$ es epiyectivo.
+    \begin{dem}
+        Para cada primo $\p \subset A$, veamos que su fibra es no vac\'ia, pues $(f^*)^{-1} (\p) = Spec\, (B \underset{A}{\otimes}A_{\p} / \p A_\p)$, con $B_\p / \p B_\p = B \underset{A}{\otimes}A_{\p} / \p A_\p$, y debemos ver que $B_\p / \p B_\p \neq \emptyset$. $B_\p$ como $A$-m\'odulo, es $A_\p$-m\'odulo finito, pero $\p A_\p \subset A_\p $ es ideal maximal, as\'i pues, por Nakayama $B_\p / \p B_\p \neq 0 \iff B_\p \neq 0$, y como $A \hookrightarrow B$ es inyectivo, $A_\p \hookrightarrow B_\p$ es tambi\'en inyectivo, $0 \neq \p \subset A_\p$ existe en $B_\p$, luego $B_\p \neq 0$. 
+    \end{dem}
+    \item Si $f:A \to B$ es finito, $f^* : Spec\, B \longrightarrow Spec \, A$ es cerrada. Es decir, que $f^*((J_0)) = (f^{-1}(J))_0$.
+    \begin{dem}
+        Se tiene el diagrama
+        $$\bt A \arrow{d} \rar{f} & B \arrow{d} \\ A/f^{-1}(J) \rar[hook]{\bar f} & B/J \et$$
+        y entonces al pasar al espectro
+        $$\bt  (f^{-1}(J))_0 \arrow[phantom]{r}{\subset} &[-13mm]  Spec\, A & \arrow{l}{f^*} Spec\, B &[-12mm] \arrow[phantom]{l}{\supset} (J_0)  \\[5mm]  
+        & \arrow{ul}{\sim} Spec\, (A/f^{-1}(J)) \arrow[hook]{u} & \arrow{l}{\bar f^*} Spec\, (B/J) \arrow[hook]{u} \arrow{ur}{\sim} \et$$
+        $\bar f$ es finito inyectivo, luego $\bar f^*$ es epiyectivo, y $f^*((J)_0) = (f^{-1} (J))_0$
+    \end{dem}
+    \begin{cor}
+        Si $f^*$ es epiyectiva, sea $Z\subset Spec\, B$ un subconjunto cualquiera ${f^*}^{-1}(Z) \subset Spec\, B \Rightarrow Z = f^* ({f^*}^{-1}(Z)) = f^*(cerrado) = cerrado$
+        y la topolog\'ia que tiene es la cociente, pudiendo entender $Spec\, A = Spec\, B / R_{f^*}$ por la relaci\'on de equivalencia dada por $f^*$.  
+    \end{cor}
+\end{enumerate}
+\end{propis}
+\begin{propis}
+Dado $f: A \longrightarrow B$ un morfismo finito, entonces \vspace{-3mm}
+\begin{enumerate}
+    \item $\dim B \le \dim A$
+    \begin{dem} Dada una cadena $\p_1 \subset \cdots \subset \p_n$ de primos de $B$, sus im\'agenes por $f^*$, veamos si se tiene la cadena estricta $f^{-1}(\p_1) \subsetneqq \cdots \subsetneqq f^{-1}(\p_n)$. Para el caso de dos, se tendr\'ia que son $\p\subsetneqq \p'$, entonces $f^{-1} (\p) \neq f^{-1}(\p')$.
+    
+    Supongamos no cierto, es decir, $f^{-1} (\p) = f^{-1}(\p') = \q \subset A$, de forma que $f^*(\p) = f^*(\p') = \q$, es decir, que ambos $\p\subsetneqq \p'$ est\'an en la fibra de $\q$, pero como las fibras de primos son discretas (maximales en las fibras), llegamos a contradicci\'on pues $\p = \p'$. 
+    \end{dem}
+    \item Si $f$ es inyectivo $\Rightarrow \dim B = \dim A$.
+    \begin{dem}
+        $f^*$ es cerrado y epiyectivo, se tiene la cadena de primos $\q_1 \subsetneqq \cdots \subsetneqq \q_n \subset A \hookrightarrow B$, entonces dada la cadena $\p_1 \subsetneqq \cdots \subsetneqq \p_n$ y cortarla con $A$, entonces para cada $i$, $\p_1 \overset{f^*}{\longrightarrow} \q_1$ y $A / \q_1 \hookrightarrow B / \p_1$ por el paso al cociente, y entonces $[\q_2] \subset A / \p_1$ tiene fibra en $B / \p_1$, que llamaremos $[\p_2] \subset B / \p_1$ por $f^*$.  
+    \end{dem}
+\end{enumerate}
+\end{propis}
+\begin{obs}
+    No es lo mismo una \'algebra finita que de tipo finito.
+\end{obs}
+\section{Elementos enteros}
+Sea $B$ una $A$-\'algebra, 
+\begin{defi}
+    Un \textbf{elemento} $b\in B$ se dice \textbf{entero} sobre $A$ cuando existe un polinomio $p(x) \in A[x]$ m\'onico ($p(x) = x^n + a_{n-1} x^{n-1} +\cdots + a_n$) tal que $p(b) = 0$. 
+\end{defi}
+\begin{prop} $b \in B$ es entero (sobre $A$) $\iff \, A[b] \subset B$ es $A$-\'algebra finita. Es decir, si $p(x) = \bar a_o x^{n} + \cdots +\bar a_n$, $p(b) = \bar a_o b^n + \cdots + \bar a_n \in B$ lo pensamos en $B$. 
+\end{prop}
+\begin{obs}
+    Sea $p(x)$ m\'onico con $p(b)=0$, entonces $A[b]= (A[x]/p(x))/ I$ por el algoritmo de divisi\'on. Esto nos dice que $A[b]$ como $A$-m\'odulo es cociente de $A[x]/p(x)$, que es $A$-m\'odulo finito, con base $\{1, x, \ldots, x^{n-1}\}$, y por tanto $A[b]$ es finito.  
+\end{obs}
+\begin{dem}
+    $\Leftarrow)$ $A[b]$ como $A$-m\'odulo es finito generado, y sean $\xi_1, \ldots, \xi_r$ un sistema de generadores, en particular
+    $$\xi_j \cdot b = \sum a_{ij} \xi_i$$
+    que nos da una matriz $(a_{ij})$, cuyo polinomio caracter\'istico $C(x) = |xId-M|$ cumple que $C(M)=0$. 
+
+    Tenemos el diagrama conmutativo
+    $$\bt A^n \rar{M} \arrow{d}{\pi} & A^n \arrow{d}{\pi} \\[5mm] A[b] \rar{ b\cdot} & A[b]\et \qquad  \bt 1_j \rar[mapsto] \arrow[mapsto]{d} & \sum a_{ij} 1_j \arrow[mapsto]{d} \\[5mm] \xi_j \rar[mapsto] & b \xi_j \coloneqq \sum a_{ij} \xi_j\et$$
+    de forma que $\bb Z[x_{ij}] \subset \bb Q(x_{ij})$ con $C(\tilde M) = $polinomio con coeficientes en $\bb Z[x_{ij}]$, y es $C(\tilde M) = 0$, y $C(\tilde M) = Q(x,x_{ij})$ viene de una matriz $Q(\tilde M, x_{ij}) $ con coeficientes polinomios e $x_{ij}$ que es 0, por lo que al sustituir por $b$, sigue siendo 0.  Hemos demostrado que $C(b \cdot ) = 0 $ pero $b\cdot =h_b$, $C(h_b) = h_{c(b)} = 0 \iff C(b) = 0 $. 
+\end{dem}
+\begin{prop}
+    Una \'algebra de tipo finito $A[\xi_1, \ldots, \xi_n]$ es finita $\iff$ todo elemento es entero, en particular $\xi_1, \ldots, \xi_n$ son enteros.
+\end{prop}
+\begin{dem}
+    $\Rightarrow)$ $A[\xi_1, \ldots, \xi_n]$ es finita implica que $\xi_n$ es entero sobre $A$, usando la misma demostraci\'on que en la proposici\'on anterior, $\bar \xi_1, \ldots \bar \xi_r$ generadores de $A[\xi_1, \ldots, \xi_n]$, $\xi_ \cdot \bar \xi_j = \sum a_{ij} \bar \xi_i$. 
+
+    $\Leftarrow)$ Los morfismos $A[\xi_1] \hookrightarrow A[\xi_1,\xi_2] \hookrightarrow \cdots \longrightarrow A[x_1, \ldots, \xi_n]$ cada morfismo es finito sobre el anterior, y por tanto sobre el primero (\textcolor{red}{ejercicio} si $A \to B \to C$ son finitos, entonces $A \to C$ es finito). 
+\end{dem}
+\begin{lem}
+    Si $b_1, \ldots, b_r \in B$ son enteros, entonces $p(b_1, \ldots, b_r)$ es entero por cualquier $p(x_1, \ldots, x_r) \in A[x_1, \ldots, x_r] $
+\end{lem}
+\begin{dem}
+    $A \hookrightarrow A[b_1, \ldots, b_r] = B$ es finito porque añadir $b_i$ es finito, por ser $b_i$ enteros, y as\'i.
+\end{dem}
+\begin{obs}
+    Hemos visto pues que los enteros de $B$ sobre $A$ es una sub\'algebra de $B$, que llamaremos el cierre entero de $A$ en $B$, y se denota por $\bar A$, y se tiene $A \to \bar A \subset B$, como $B$ no tiene elementos enteros sobre $\bar A$ (salvo los de $\bar A$, pues si un elemento $b \in B$ es entero sobre $\bar A$, verifica una ecuaci\'on $x^n + \bar a_1 x^{n-1} +\cdots +\bar a_n$, con $\bar a_i \in \bar A$, se tendr\'ia que $A[\bar a_1, \ldots, \bar a_n]\subset  A[\bar a_1, \ldots, \bar a_n][b]$ es finito, y $A \to A[\bar a_1, \ldots, \bar a_n]$ tambi\'en es finito, en particular $A\to A[\bar a_1, \ldots, \bar a_n,b]$ es finito, $b$ es entero sobre $A$ y por tanto $b\in \bar A$). 
+\end{obs}
+\begin{ejem}
+    Sea $A$ \'integro, $\Sigma=A_o, \, A \subset \Sigma \hookrightarrow k$, y $\bb Z \subset \bb Q\hookrightarrow k \supset \bar{ \bb Z}$ es libre y finito generado como $\bb Z$-m\'odulo, es decir, $\bar {\bb Z} = [\alpha_1, \ldots, \alpha_r]$.
+\end{ejem}
+\begin{custom}[Recordatorio dfu]
+    Sea $A$ un dominio de factorizaci\'on \'unica (todo $a\in A$, $a=u p_1^{n_1} \cdots p_r^{n_r}$ con $p_i$ irreducible (es decir, si $p=q_1\cdot q_2$, entonces $q_1 = \bar u \cdot p$ \'o $q_2 = u' \cdot p$), y es \'unica (si $a = u' q_1^{m_1} \cdots q_{r'}^{m_{r'}}$, salvo reordenaciones, $p_i=q_i\cdot u_i$ salvo unidades, $r=r'$ y $n_i = m_i$). Adem\'as, un elemento $p$ es irreducible $\iff$ $p$ es primo ($pA$ es ideal primo).  
+\end{custom}
+\begin{ejem}
+    $\bb Z,\, k[x]$ son dominios de factorizaci\'on \'unica. Adem\'as el Lema de Gauss asegura que si $A$ es dfu, entonces $A[x]$ es dfu. Por ejemplo, $k[x_1,\ldots, x_n],\bb Z[x_1,\ldots, x_n]$ son dfus aunque ya no son de ideales principales.
+\end{ejem}
+\begin{defi}
+    Sea $A$ \'integro, se dice \textbf{\'integramente cerrado} en su cuerpo de fracciones $A \subset \Sigma$ si $\bar A = A$ (es decir, no hay fracciones que sean enteras). 
+\end{defi}\begin{lem}
+    No hay fracciones que sean enteras, en su cuerpo de fracciones no hay enteros. 
+\end{lem}
+\begin{dem}
+    Sea $\frac{a}{b} \in \Sigma$ irreducible,
+    $$\left(\frac{a}{b} \right)^{n} + a_1 \left(\frac{a}{b} \right)^{n-1} + \cdots + a_n = 0 $$
+    $$a^n  = -a_1 b a^{n-1} + \cdots - b^n a_n$$
+    entonces, si $p$ divide a $b$, divide a $a^n \Rightarrow $ divide a $a$, ser\'ia un primo com\'un de $a$ y $b$, llegando a contradicc\'on (supusimos que la fracci\'on es irreducible), entonces $b$ es un unidad. 
+
+    Entonces, en un dominio de factorizaci\'on \'unica, son \'integros, cerrados.
+\end{dem}
+\begin{lem}
+    [de normalizaci\'on de Noether] Supongamos que $A = k[\xi_1, \ldots, \xi_n]$ (el anillo de funciones de una variedad algebraica). Existe un morfismo finito 
+    $$\bt k[x_1, \ldots, x_d] \rar & A \et $$
+    es decir, un morfismo finito $Spec \, A \longrightarrow \bb A_d$. 
+\end{lem}
+\begin{dem}
+    $$\bt k[\xi_1', \ldots, \xi'_{n-1}] \rar[hook]{finito} & k[\xi_1', \ldots, \xi'_{n-1}, \xi'_n] \\ k[x_1, \ldots, x_d] \arrow{ru} \arrow[hook]{u}{finito} \et$$
+    y entonces si $\xi_1, \ldots, \xi_n$ son algebraicamente independientes, entonces $k[\xi_1, \ldots, \xi_{n}] \simeq k[x_1, \ldots, x_n]$. Vamos a decir que el monomio $\xi_1^{m_1} \cdots \xi_r^{m_r}$  es mayor que otro cuando $(m_1, \ldots, m_r) \ge (m_1' , \ldots, m_r')$ en orden lexicogr\'afico, $m_1 \geq m_1'$ \'o si $m_1 = m_1'$, entonces $m_2 \ge m_2'$ \'o si $m_2 = m_2'$, ...
+
+    Sea $p(\xi_1, \ldots, \xi_n) = \xi_1^{m_1} \cdots \xi_n^{m_n}  + \cdots = 0$, hacemos el cambio de variable $\xi_1'=\xi_1-\xi_n^{d_1}, \, \xi_2'=\xi_2-\xi_n^{d_2}, \ldots, \xi_{n-1}'=\xi_n-\xi_n^{d_n}, \xi_n' = \xi_n$, de forma que $d_1 \gg  d_2 \gg  d_3 \gg  \cdots \gg  d_n$.  $A = k[\xi_1', \ldots, \xi_n']$, entonces $p(\xi_1, \ldots, \xi_n)  = \bar p(\xi_1', \ldots, \xi_n') = q(\xi_1', \ldots, \xi_{n-1}'){\xi'}_n^r + \cdots  = 0$ y demostrando que $q=1$, vemos que $k[\xi_1', \ldots, \xi'_{n-1}] \longleftarrow k[\xi_1', \ldots, \xi'_{n-1}, \xi'_n] $ es finito. 
+    $$\xi_1^{r_1} \cdots \xi_n^{r_n} \longmapsto (\xi_1' + \xi_n^{d_1})^{r_1} \cdots (\xi_{n-1}' + \xi_{n-1}^{d_1}) \xi_n$$
+    de forma que el grado es $r_1d_1+r_2d_2 + \cdots + r_{n-1} d_{n-1} + r_n$ y como $(\xi_1' + \xi_n^{d_1})^{r_1} \cdots (\xi_{n-1}' + \xi_{n-1}^{d_1})$ es m\'onico por serlo cada uno de ellos, por lo que es m\'onico sobre $\xi_n$ y $\bar p(\xi_1',\ldots, \xi_{n-1}', x)$ es m\'onico asegurando la finitud del morfismo. 
+\end{dem}
+
+Tenemos que $k[x_1, \ldots, x_r] \hookrightarrow k[\xi_1, \ldots, \xi_n]$ es un morfismo finito
+\begin{obs}
+    $\dim(k[x_1, \ldots, x_n] ) = n$, que lo hemos visto en el origen, localmente, pero en general se usa con el polinomio de Hilbert y el graduado. $ 0 \subset (x_1) \subset (x_1,x_2) \subset \cdots \subset (x_1, \ldots, x_n)$ es una cadena de ideales primos de longitud $n$, entonces $\dim(k[x_1, \ldots, x_n] ) \ge n$. Por inducci\'on sobre $n$, vamos a ver que $\dim(k[x_1, \ldots, x_n] ) \geq n\dim(k[x_1, \ldots, x_n] ) \le n$. Sea $0 \subset \p_1 \subset \cdots \subset \p_r$, vamos a ver que $r \le n$. Escojamos $0\neq p\in \p_1$, en $k[x_1,\ldots, x_n]/p $, se tiene la cadena $\bar \p_1 \subset \bar \p_2 \subset \cdots \subset \bar \p_r$ con $\bar \p_i = \p_i / p k[x_1, \ldots, x_n]$ pero $k[x_1,\ldots, x_n]/p =k[\xi_1, \ldots, \xi_n]$ es de tipo finito, y por el mismo argumento que en la demostraci\'on del Lema de Noether, se puede hacer un cambio de variable, de forma que $k[\xi_1, \ldots, \xi_n] = k[\xi'_1, \ldots, \xi'_n][\xi_n] \supset k[\xi'_1, \ldots, \xi'_{n-1}] $ es finita, y hay un morfismo finito de $k[y_1, \ldots, y_m] \subset k[\xi'_1, \ldots, \xi'_{n-1}]$, de forma que $\dim(k[y_1, \ldots, y_m]) = m \le n-1 $, luego $\dim(k[x_1,\ldots, x_n]/p) = m \le n-1$ y por tanto
+    $$r-1 = \ell(\bar \p_1 \subset \cdots \subset \bar \p_r) \le \dim k[x_1,\ldots, x_n]/p  = m \le n-1$$
+    $$\Rightarrow r \le n$$
+\end{obs}
+\begin{cor}[Teorema de los ceros de Hilbert]
+    $k \hookrightarrow k[\xi_1, \ldots, \xi_n]/\m$ es finita.
+\end{cor}\begin{dem}
+    $k \hookrightarrow k[\xi_1, \ldots, \xi_n]/\m = k[\bar \xi_1, \ldots, \bar \xi_n]$ es cuerpo, y por el Lema de Noether hay una inmersi\'on finita $k[x_1,\ldots, x_s] \hookrightarrow k[\bar \xi_1, \ldots, \bar \xi_n]$, pero $k[\bar \xi_1, \ldots, \bar \xi_n]$ es de dimensi\'on 0, pero como la inyecci\'on es finita, las dimensiones coinciden luego $\dim(k[x_1,\ldots, x_s] ) = s = 0$, es decir, $k[x_1,\ldots, x_s] = k$. 
+\end{dem}
+\begin{prop}
+    $Rad(k[\xi_1, \ldots, \xi_n]) = Rad_{J}k[\xi_1, \ldots, \xi_n]$ siendo el radical de Jacobson $\bigcap $Maximales, y en general $\bigcap \p \subseteq \bigcap \m$, hay que demostrar que $\supseteq$. 
+\end{prop}
+\begin{dem}
+    Sea $f\in \bigcap \m, f\nin \bigcap \p$, $Spec \, (k[\xi_1, \ldots, \xi_n]_f) \subset k[\xi_1, \ldots, \xi_n][\frac{1}{f}]$ pero $Spec(k[\xi_1, \ldots, \xi_n]_f) = Spec k[\xi_1, \ldots, \xi_n] -(f)_0 \neq \emptyset$. As\'i, 
+    $$\bt k[\xi_1, \ldots, \xi_n]\arrow[bend left=8mm]{rr}{\pi} \rar & k[\xi_1, \ldots, \xi_n]_f \rar & k[\xi_1, \ldots, \xi_n]_f/\m \\[-5mm] f \rarmaps & \text{invertible} \rarmaps & \text{invertible} \neq 0 \et$$ de forma que si $\p = \ker \pi$, $k[\xi_1, \ldots, \xi_n]/\p \hookrightarrow k[\xi_1, \ldots, \xi_n]/\bar \m$ es un cuerpo, y de tipo finito, luego es una extensi\'on finita de $k$, con $k \hookrightarrow k[\xi_1, \ldots, \xi_n]/\p$, concluyendo que $k[\xi_1, \ldots, \xi_n]/\p$ es $k$-\'algebra finita \'integra, por lo que es cuerpo y $\p$ es maximal, de forma que $f$ es invertible en $k[\xi_1, \ldots, \xi_n]_f$, luego $f\neq 0$ y como $f \nin \bar \m$, $f\nin \p$, hemos encontrado un maximal que no contiene a $f$. 
+\end{dem}
+\begin{obs}
+    $\frac{p(\xi_1, \ldots, \xi_n)}{f^r}= \frac{1}{f^r} p(\xi_1, \ldots, \xi_n) \in k[\xi_1, \ldots, \xi_n][\frac{1}{f}] $
+\end{obs}
+\begin{obs}
+    Dado $p(x_1, \ldots, x_n)$ con $p(\alpha_1, \ldots, \alpha_n) = 0$ para todo soluci\'on del sistema, entonces $p^m = \sum_{i=1}^n \lambda_i (x_1, \ldots, x_n) p_i$.  
+\end{obs}
+\begin{prop}
+    Sea $A$ un anillo \'integro local de ideales principales, entonces $A$ es normal ($A \subset \Sigma = A_o$), es decir, $\bar A = $ cierre entero de $A$ en $\Sigma=$ los elementos de $\Sigma$ enteros sobre $A = A$. 
+\end{prop}
+\begin{dem}
+    Sea $\frac{a}{b} \in \Sigma$ entera sobre $A$, $a= u \cdot p_1^{n_1} \cdots p_r^{n_r}, \, b = \bar u \cdot q_1^{n_1} \cdots q_s^{n_s}$, podemos suponer que no tienen primos comunes, de forma que $\frac{a}{b}$ es irreducible y $\nin A$, siendo $b$ no invertible, luego $b$ es divisible por un primo $q$ y $a$ no es divisible por $q$.  
+    $$\left(\frac{a}{b} \right)^{n} + a_1 \left(\frac{a}{b} \right)^{n-1} + \cdots + a_n = 0 $$
+    $$a^n  = -a_1 b a^{n-1} + \cdots - b^n a_n$$
+    y si $q$ divide a $ -a_1 b a^{n-1} + \cdots - b^n a_n$, $q$ divide a $a^n$ y entonces $q$ divide a $a$. 
+\end{dem}
+\section{Anillos de valoraci\'on}
+\begin{defi} Sea $A$ \'integro y $\Sigma = A_o$ su cuerpo de fracciones, una \textbf{valoraci\'on} es un morfismo
+    $\nu : \Sigma^{\times} \longrightarrow G$ siendo $G$ un grupo abeliano totalmente ordenado, es decir, para todo $g_1,g_2\in G \Rightarrow g_1 \le g_2 \text{ \'o } g_2\le g_1$, y si $g_1\le g_2, g\in G \Rightarrow g_1 + g \le g_2 + g$. Entonces $\nu$ es morfismo de grupos ($\nu(fh) = \nu (f) + \nu(h)$) y $\nu(f+h) = \min(\nu(f), \nu(h))$. 
+\end{defi}
+\begin{ejem}
+    Si $A=k[x_1, \ldots, x_n]$, $\m=\m_o$ $\nu(p(x_1, \ldots, x_n)) = h$ co $p(x_1, \ldots, x_n) \in \m^h - \m^{h+1}$ entonces $\nu: k(x_1, \ldots, x_n)^{\times} \longrightarrow \bb Z$ y $\nu\left(\frac{p}{q}\right) = \nu(p)-\nu(q)$, y es lo que se llama la valoraci\'on $\m$-\'adica, que es el rango de un polinomio, el menor de sus grados, que es cu\'antas veces se anula en el origen. 
+\end{ejem}
+\begin{ejem}
+    Si $\mc O$ es un anillo local noetheriano, $\m \subset \mc O$ el maximal, entonces
+    $$\nu_{\m} (f) = h \iff f\in \m^h - \m^{h+1}$$
+    $$\nu_{\m}\left(\frac{f}{g} \right) = \nu_\m (f) - \nu_\m(g)$$
+\end{ejem}
+
+\begin{defi}
+    Decimos que un \textbf{anillo} es \textbf{de valoraci\'on} cuando para cada $f \in \Sigma$ se verifica que $f\in A$ \'o $f^{-1} \in A$. 
+\end{defi}
+\begin{ejem}
+    Sea $\Sigma$ un cuerpo y $\nu: \Sigma^{\times} \longrightarrow G$ una valoraci\'on, consideramos los elementos $A = \{ f \in \Sigma \,/\, \nu(f) \ge 0\}=\mc O_{\nu}$, y se cumple que $A$ es un anillo local y de valoraci\'on, y $\m = \{f\in \Sigma \, / \, \nu(f) > 0\}$. Se define $\nu(0)=\infty$ tal que $g+ \infty = \infty, \, \infty  + \infty = \infty$. Aunque se convierte en semigrupo.
+\end{ejem}
+\begin{teo}
+    $\mc O_{\nu}$ es anillo local de valoraci\'on.
+\end{teo}
+\begin{dem}
+    Es de valoraci\'on, pues dada $f\in \Sigma^{\times}$, entonces $f\in \mc O_{\nu}$ \'o $f^{-1}\in \mc O_{\nu}$ ya que como $\nu(f^{-1}) = -\nu(f)$, y $\nu(f)$ es totalmente ordenado, luego $\nu(f) \ge 0$ \'o $\nu(f) \le 0$. En el primer caso $f\in \mc O_{\nu}$, y en el segundo caso, como $\nu(f^{-1}) = - \nu(f) \ge 0$, y por tanto $f^{-1} \in \mc O_{\nu}$.
+
+    Es local, es decir, $\m \subset\mc O_{\nu}$ es ideal maximal. Por la desigualdad, es ideal, si $\nu(f) \ge 0, \nu(h) \ge 0$, $\nu(f+h) \ge \min(\nu(f)(>0) , \nu(h)(>0) ) > 0 $, es decir, si $f, h\in \m \Rightarrow f+h \in \m$. Si $f\in \m, h \in \mc O_{\nu}$, 
+    $$\nu(f\cdot h) = \nu(f) (>0) + \nu(h)(\ge 0) > 0 $$
+    
+    Para ver que es maximal, veamos que todo elemento que no pertenece a \'el es invertible. Es decir, si $a\in \mc O - \m\Rightarrow a $ es invertible. \textcolor{red}{Ejercicio}. $a\in \mc O - \m$, $\nu(a) \ge 0, \, \nu(a) \not> 0 \Rightarrow \nu(a)=0, \, \nu(a^{-1}) = -\nu(a) = 0 \Rightarrow a^{-1} \in \mc O$. 
+\end{dem}
+
+Todo anillo $\mc O$ de valoraci\'on, define una valoraci\'on $\Sigma^{\times} \overset{\nu}{\longrightarrow} \Sigma^{\times} / \mc O^{\times}$ es una valoraci\'on con $[f] \le [h]$ cuando $\frac{h}{f} \in \mc O^{\times}$. $f\ge h, \, h\in \Sigma^{\times}, fh'\ge hh'$. $\frac{fh'}{hh'} = \frac{f}{h} \in \mc O^{\times}$. Es decir, $f \ge h$ \'o $h\ge f$, $\frac{f}{h} \in \mc O$ \'o $\frac{h}{f}\in \mc O$. Entonces $\mc O_{\nu} = \{f\in \Sigma\, / \, \nu(f) \ge 0 = \nu(1)\}$ pues $\nu(f) \ge \nu(1), f\ge 1 \Rightarrow \frac{f}{1} \in \mc O$, luego $\mc O_{\nu} = \mc O$.
+
+\begin{prop}
+    Una valoraci\'on define un anillo de valoraci\'on, y viceversa.
+\end{prop}
+\begin{dem} 
+Dado $\nu$, $\mc O_{\nu}$ es de valoraci\'on, con $f\in \Sigma \Rightarrow \nu(f) \ge 0$ \'o $\nu(f) \le 0 \Rightarrow f\in \mc O_{\nu}$ \'o $f^{-1}\in \mc O_{\nu}$ y como $\Sigma \in (\mc O_{\nu})_o$, $f\in \Sigma \Rightarrow f\in\mc O_{\nu}\subset (\mc O_{\nu})_o$ \'o $f^{-1} \in \mc O_{\nu} \subset (\mc O_{\nu})_o \Rightarrow f\in (\mc O_{\nu})_o$. 
+
+Dado $\mc O$ anillo de valoraci\'on, se tiene el grupo $G=\modulo{\Sigma^{\times}}{\mc O^{\times}}$, que define la valoraci\'on  $\Sigma^{\times} \overset{\nu}{\longrightarrow} \Sigma^{\times} / \mc O^{\times}$ y falta que est\'e totalmente ordenado. Se tiene que $f \le h$ cuando $\frac{h}{f} \in \mc O^{\times}$, y para que se cumpla la propiedad antisim\'etrica, $f\le h \le f \iff \frac{h}{f}$ y $\frac{f}{h} \in \mc O \iff \frac{h}{f} \in \mc O^{\times}$, que como clases de equivalencia es 
+$$\bar f \le \bar h \le \bar f \iff \left( \overline{\frac{h}{f}} \right)=1 \iff \bar h = \bar f$$
+es decir, $\le$ es un orden parcial. Para que sea total falta que est\'e definido para todo elemento. $f, h\in \Sigma \Rightarrow f\le h$ \'o $h \le f$, $\frac{f}{h}$ \'o $\frac{h}{f} \in \mc O$. Falta ver que $\nu(f+h) \ge \min(\nu(f),\nu(h))$, es decir, que $\nu(f+h) \ge \nu(f)$ \'o $\nu(h)$.  $f \le h$ \'o $h \le f$. Supongamos $f \le h$, entonces $\frac{h}{f} \in \mc O$, luego 
+$$f+h = f\left(1+\frac{h}{f}\right) \Rightarrow \frac{f+h}{h} = 1+\frac{h}{f} \in \mc O \Rightarrow f+h \ge f$$ 
+\end{dem}
+\begin{defi}
+    Decimos que una \textbf{valoraci\'on} es \textbf{discreta} cuando $G \simeq \bb Z$ pensando $G$ como $\Im \nu$. 
+\end{defi}
+\begin{ejem}
+    Sea $A$ de ideales principales con $A_\p$, se tiene la valoraci\'on $\Sigma^{\times} \overset{\nu}{\longrightarrow} \bb Z$, con
+    $$\frac{f}{h} = \frac{mp^n}{np^s} = \frac{m}{n} p^{r-s} \longmapsto r-s$$
+    es decir, en $k[x]$, $\frac{p(x)}{q(x)} \longmapsto$ multiplicidad de $\frac{p(x)}{q(x)}$ en $x=\alpha$. El anillo de valoraci\'on es $\mc O_{\nu} = A_\p$ por la f\'ormula, pues las fracciones de valor positivo son las que tienen el denominador no divisible por $p\in \p$. 
+\end{ejem}
+\begin{defi}
+   Sea $\mc O \supset \m$ local, $\mc O \longrightarrow B$ es \textbf{dominante} cuando existe $\m ' \subset B$ con $\m' \cap \mc O = \m$. Como $\mc O \subset \Sigma$ y $\mc O'\subset \Sigma$, entonces $\mc O \le \mc O'$ domina si $\mc O \subset \mc O'$. 
+\end{defi}
+\begin{teo}
+    Un anillo local es de valoraci\'on $\iff$ es maximal en $\Sigma$ con el orden de dominaci\'on. Esto es, si $\mc V \subset \Sigma$ de valoraci\'on, $\mc V \le B \subset \Sigma$, siendo $\mc V$ anillos locales $\Rightarrow B = \mc V$. Rec\'iprocamente, si $\mc V \subset \mc V_o$ es maximal $\Rightarrow \mc V$ es de valoraci\'on.
+\end{teo}
+\begin{dem}
+    $\Rightarrow)$ Supongamos $\mc O$ de valoraci\'on, entonces demostraremos que si $\mc O \le \mc O' \Rightarrow \mc O' = \mc O$. 
+
+    Supogamos $b\in \mc O, b\nin \mc O$. Entonces $b^{-1} \in \mc O \Rightarrow b^{-1} \in \m$. Entonces $b^{-1} \in \m \mc O '$ y $b\in \mc O' \Rightarrow \m \mc O' = \mc O'$, pero al estar dominado se tiene que $\m' \cap \mc O = \m \Rightarrow \m'\supset \m$, por lo que $\m \mc O ' =\mc O' \subset \m' \, !!$
+
+    $\Leftarrow)$ Supogamos ahora que $\mc O$ es maximal. Sea $f\in \Sigma \, / \, f\nin \mc O$. $\mc O \hookrightarrow \mc O[f]$ es un anillo m\'as grande, y $(\mc O[f])_{\p'}$ ya es local de forma que $\mc O \subsetneqq (\mc O[f])_{\m'}$, es decir, domina, luego $\m$ no tiene fibra en $\mc O[f]$. Por lo que $Spec(\mc O' / \m \mc O') = \emptyset\Rightarrow \m \mc O[f] = \mc O[f]$ y entonces $1=a_of^n + a_1 f^{n-1} + \cdots + a_n$, $a_1, \ldots, a_n \in \m$, y por tanto, 
+    $$f^{-n} -a_n f^{-n} - a_{n-1} f^{-(n-1)} - \cdots - a_o = (1-a_n) f^{-n} - a_{n-1} f^{-(n+1)} - \cdots - a_o = 0 $$
+    y $1-a_n$ es invertible $(1\nin \m)$, diviendo por \'el, 
+    $$f^{-n} - \frac{a_n}{1-a_n} f^{-(n-1)} - \cdots - \frac{a_o}{1-a_n} = 0 $$
+    luego $f^{-1}$ es entero sobre $\mc O$, es decir, el morfismo $\mc O \hookrightarrow \mc O[f^{-1}]$ es finito, $\m'$ tiene fibra y al localizar, $\mc O \hookrightarrow \mc O[f^{-1}]_{\m'}$ es dominante, y $\mc O[f^{-1}] = \mc O $ con lo que $f^{-1} \in \mc O$. 
+\end{dem}
+\begin{teo}
+    Sea $\mc O$ anillo local \'integro, 
+    \begin{enumerate}[1)]
+        \item $\mc O$ es de valoraci\'on discreta.
+        \item $\mc O$ es de ideales principales ($\equiv \, \m$ es principal).
+        \item $\mc O$ noetheriano de $\dim 1$ y normal.
+        \item $\mc O$ noetheriano de $\dim 1$ y regular.
+    \end{enumerate}
+\end{teo}
+\begin{dem}
+    1) $\Rightarrow$ 2) $\mc O$ es de valoraci\'on discreta, la valoraci\'on es $\nu(\frac{f}{g}) = \nu (f) - \nu (g) $ siendo $\nu(f) = n$ con $f\in \m^n, \, f\nin \m^{n+1}$. Veamos que $\m = t\cdot \mc O$. $\mc O$ es de valoraci\'on discreta, entonces consideremos un $f \in \m$, con $n$ la m\'inima tal que $\m^n \subset f\mc O$, y como $f\in \m^n, \, f\nin \m^{n+1}$, consideramos $h \in \m^{n+1}$, $h \nin f \mc O$. Entonces $x=\frac{h}{f} \nin \mc O, \, x\m  = \frac{h}{f} \m \subset \frac{1}{f}h\m \subset \frac{1}{f} \m^{n-1} \m = \frac{1}{f} \m^n \subset \mc O$. 
+
+    As\'i, $x \cdot \m \subset \mc O$ es un ideal, luego o bien es $x\m =\mc O$, $\m = \frac{1}{x} \mc O$ por tanto es principal, o bien $x\m \subset \m$ y $x\cdot $ es endomorfismo, y como es noetheriano (de valoraci\'on discreta) finito generado, tiene anulador y es un polinomio m\'onico, entonces $x$ es entero sobre $\mc O$, es decir, $\mc O \longrightarrow \mc O[x]$ es finito, en el espectro es epiyectivo, es decir, el maximal tienen fibra, y como $\mc O$ es de valoraci\'on, $\mc O \hookrightarrow \mc O[x]_{\m'}$ es finito y dominante, $\mc O = \mc O[x] \Rightarrow x\in \mc O$, llegando a contradicci\'on. 
+    
+    2) $\Rightarrow$ 1) Pr\'oxima proposoci\'on. 
+    
+    2) $\Rightarrow$ 3) 
+    
+    3) $\Rightarrow$ 2)
+\end{dem}
+
+\begin{prop}
+    Si $\mc O$ es local de ideales principales $\Rightarrow $ es de valoraci\'on discreta ($2) \Rightarrow 1)$).
+\end{prop}
+\begin{dem}
+    $\m = t\mc O, \, f\in \mc O \Rightarrow f=ut^n$ con $u$ invertible, 
+    $$\frac{f}{g} = \frac{ut^n}{\bar u t^m} = u t^r \quad r \in \bb Z; \, \nu\left(\frac{f}{g}\right) = r$$
+    es una valoraci\'on y discreta.
+\end{dem}
+\begin{teo}
+    Sea $\mc O$ local e \'integro. Las siguientes condiciones son  equivalentes:
+    \begin{enumerate}[1)]
+        \item $\mc O$ es de valoraci\'on discreta.
+        \item $\mc O$ es de ideales principales ($\equiv \, \m$ es principal).
+        \item $\mc O$ es de valoraci\'on y noetheriano.
+    \end{enumerate}
+\end{teo}
+\begin{dem}
+    2) $\Rightarrow$ 3) Por lo anterior.
+
+    3) $\Rightarrow$ 2) Sea $I\subset \mc O$ un ideal, $\mc O$ es noetheriano, entonces entre sus generadores consideremos el de menor valor, como $I = (\xi_1, \ldots, \xi_n)$, consideramos el m\'inimo $\nu(\xi_1)=\min (\nu(\xi_2), \ldots, \nu(\xi_n))$. Si $\xi \in I$; $\nu(\xi_1) \le \nu(\xi) \Rightarrow \nu \left( \frac{\xi}{\xi_1} \right) \ge 0, \, \frac{\xi}{\xi_1} \in \mc O$. Entonces $\xi = \xi_1 \cdot \frac{\xi}{\xi_1} \Rightarrow \xi \in \xi_1 \mc O$, y como $\xi = a_1\xi_1 + \cdots + a_n \xi_n$, $\nu(\xi) \ge \min(\nu(a_i\xi_i)) = \min(\nu(a_i)+ \nu(\xi_i)) \ge \min(\nu(\xi_i)) = \nu(\xi)$.
+
+    1) $\Rightarrow$ 2) Sea $I \subset \mc O$ ideal, como $\nu(I) \subset \bb N$, el generador es de valor m\'inimo, $\xi_1 \in I \, / \, \nu(\xi_1)$ es m\'inimo en $I$. Por lo que el ideal es pricipal
+\end{dem}
+\section{Normalidad}
+\begin{defi}
+    Sea $A$ \'integro, se dice \textbf{normal} cuando el cierre entero de $A$, $\bar A$, en $A_o = \Sigma$ es $A$. Es decir, \'integramente cerrado en su cuerpo de fracciones.
+\end{defi}
+\begin{prop}
+    Si $\mc O$ es local noetheriano de $\dim 1$, regular (no singular) $\iff \, \m = t\mc O$ es principal $\iff \, \mc O$ es de ideales principales.
+\end{prop}
+\begin{dem}
+    Sea $0 \neq I \subset \m \subset \mc O$, como $\mc O$ es de $\dim 1$, $\mc O / I$ es de $\dim 0$ noetheriano y local, luego $Spec \, \mc O / I = \{\bar \m\} \Rightarrow \rad \mc O / I =\bar \m \Rightarrow \bar \m =0$, por lo que $\m^n \subset I \subset \m$. Sea $I\subset \m^r$, la maxima potencia que contiene a $I$, entonces, $I \longrightarrow \m^r / \m^{r+1} \simeq t^r \mc O / t^{r+1} \mc O \simeq \mc O / t^r \mc O = \mc O / \m = k$ de forma que $\dim \m^r / \m^{r+1} = 1$ como $k$-e.v. y existe $\xi \in I$ tal que $\xi \in \m^r$ es base en $\m^r / \m^{r+1} = \m^r / \m\cdot \m^r$. Entonces $\xi$, por Nakayama, es generador de $\m^r$, luego $\xi \mc O = \m^r$. Se tiene que 
+    $$\m^r \supset I \supset \xi \mc O = \m^r \Rightarrow \m^r = I$$
+\end{dem}
+\begin{lem}
+    Todo anillo $\mc V$ de valoraci\'on es normal.
+\end{lem}
+\begin{dem}
+    Sea $f\in \mc V_o = \Sigma$ y entero sobre $\mc V$. Sea $\mc V \hookrightarrow \mc V[f]$, es finito, que en el espectro es epiyectivo, luego es un morfismo dominante, luego una igualdad, $\mc V = \mc V[f] \Rightarrow f\in \mc V$. 
+\end{dem}
+\begin{prop}
+    Sea $\mc O$ local noetheriano, es normal de $\dim 1$ $\iff$ es de ideales principales.
+\end{prop}
+\begin{dem}
+    $\Leftarrow)$ Como el maximal es $\m = t \mc O$ es regular, luego normal.
+
+    $\Rightarrow)$ 
+\end{dem}
+\begin{obs}
+    Se tiene que los anillos de valoraci\'on son locales e \'integramente cerrados en $\mc V_o$ (=anillo normal). 
+\end{obs}
+\begin{teo}
+    Sea $A$ \'integro, $\Sigma$ el cuerpo de fracciones, $\bar A = $ cierre entero de $A$ en $\displaystyle \Sigma = \{f\in \Sigma \text{ enteros sobre }A\} = \bigcap_{\mc V \subset \Sigma \text{ de valoraci\'on con } A \subset \mc V} \mc V$. El cierre entero es \'integramente cerrado, luego normal.
+\end{teo}
+\begin{lem}
+    $f \in \Sigma$ es entero sobre $A$ $\iff$ $f^{-1}$ es invertible en $A[f^{-1}]$ ($\iff f\in A[f^{-1}]$). 
+\end{lem}
+\begin{dem}
+    $\Rightarrow)$ Se verifica una ecuaci\'on $f^n+ a_1 f^{n-1} + \cdots +a_n= 0 $ ($a_1, \ldots, a_n \in A$). Entonces
+    $$f+a_1 + a_2 f^{-1} + \cdots + a_nf^{-(n-1)} = 0 \Rightarrow f\in A[f^{-1}] \Rightarrow f^{-1} \text{ es invertible en }A[f^{-1}]$$
+
+    $\Leftarrow)$ Si $f^{-1}$ es invertible en $A[f^{-1}] \Rightarrow f\in A[f^{-1}] \Rightarrow f = b_o + b_1 f^{-1} + \cdots  + b_s f^{-s} (b_1, \ldots, b_s \in A)$, por lo que $f^{s+1} -b_o f^s - b_1 f^{s-1} - \cdots - b_s = 0 \Rightarrow f$ es entero sobre $A$.
+\end{dem} 
+\begin{lem}
+    Sea $A$ local, si $f$ no es entero sobre $A$ $\Rightarrow A \hookrightarrow A[f^{-1}]$ es dominante. Por el lema anterior, $f^{-1}$ no es invertible. 
+\end{lem}
+\begin{dem}
+    Supongamos que $A \hookrightarrow A[f^{-1}]$ no es dominante, veamos que entonces $f$ es entero. Como no es dominante, el maximal $\m\subset A$ no tiene fibra, es decir, $Spec\left(A[f^{-1}] / \m A[f^{-1}] \right) = \emptyset$, es decir, $A[f^{-1}] / \m A[f^{-1}] = 0 \Rightarrow A[f^{-1}] = \m A[f^{-1}]$. Es decir, $1\in \m A[f^{-1}]=\m[f^{-1}]$, luego 
+    $$1=a_o + a_1f^{-1} + \cdots + a_n f^{-n} \Rightarrow 0 = (1-a_o) f^n+a_1f^{n-1} + \cdots + a_n  \qquad (a_o, \ldots, a_n \in \m)$$
+    como $a_o \in \m, \, 1-a_o$ es invertible y por tanto dividiendo por \'el, 
+    $$0 = f^n + \frac{a_1}{1-a_o} f^{n-1} + \cdots + \frac{a_n}{1-a_o}$$
+    y por tanto $f$ es entero porque se puede despejar. 
+
+    Se puede extender a $A$ no local, m\'as adelante. 
+\end{dem}
+\begin{dem}[del teorema]
+    $\boxed{\subseteq} $ $f\in \Sigma$ sobre $A \Rightarrow f$ entero sobre $\mc V \Rightarrow f\in \mc V \Rightarrow \bar A \subset \bigcap \mc V$
+
+    $\boxed{\supseteq}$ Para la inclusi\'on contraria hemos de demostrar que si $f$ no es entero, $\Rightarrow f\nin \mc V$ para alg\'un $\mc V$. Usaremos los dos lemas previos. Veamos que si $f\nin \bar A\Rightarrow f\nin \mc V$ para alg\'un $\mc V$. Supongamos $f$ entero sobre $A$, entonces $A \hookrightarrow A[f^{-1}]$ es dominante, y $f^{-1}$ no es invertible en $A[f^{-1}]$, entonces $f^{-1} \in \bar \m$ cierto maximal, localizando $A[f^{-1}]_{\bar \m}$ y se tiene el paso a la localizaci\'on $A \longrightarrow A_\p \longrightarrow A[f^{-1}] \longrightarrow A[f^{-1}]_{\bar \m}$, y como es local, por el Lema de Zorn, est\'a contenido en un maximal con la dominaci\'on, es decir, en $\mc V$, por lo que $f^{-1} \in \bar \m \subset \text{ maximal de } \mc V$, y $\mc V$ no contiene a $f$, pues contendr\'ia al inverso de $f^{-1}$. Por lo que hemos encontrado el anillo de valoraci\'on buscado.  
+\end{dem}
+Sea $A$ \'integro, $\Sigma \longrightarrow L$ una extensi\'on finita
+\begin{teo}
+    Si $C = $ cierre entero de $A$ en $L$, $C = \bigcap_{\mc V \text{ valoraci\'on de } L \text{ conteniendo a} A} \mc V$
+\end{teo}
+\begin{dem}
+    $\mc V$ de valoraci\'on $\Rightarrow$ \'integramente cerrado (en $L$), $A \subset \bigcap \mc V = $\'integramente cerrado $\Rightarrow \mc V \supset C$.
+
+    Se trata de ver que si $f\nin C, \, f\in L$ no entero sobre sobre $A$, existe $\mc V \subset L$ de valoraci\'on tal que $f\nin \mc V$. Usamos el lema de que $f\in L$ es entero sobre $A \iff f^{-1}$ es invertible en $A[f^{-1}]$, y como $f$ no es entero, $f^{-1}$ no es invertible en $A[f^{-1}] \Rightarrow f^{-1} \in \p \subset A[f^{-1}]$. Localizamos
+    $$A \longrightarrow A[f^{-1}] \longrightarrow A[f^{-1}]_{\p} \subset \mc V$$
+    y este $\mc V$ domina y existe por el Lema de Zorn, y $f^{-1} \in \m \subset \mc V \Rightarrow f^{-1}$ no invertible en $\mc V\Rightarrow f\nin \mc V$. 
+\end{dem}
+
+Sea $A$ anillo, $\Sigma = A_o$ y $A \hookrightarrow B$ un morfismo inyectivo de anillos \'integros con sus respectivos cuerpos de fracciones $\Sigma, \, L$.\begin{teo}
+    $C = $ el cierre entero de $A$ en $B$, $S \subset A$ sistema multiplicativo, $$C_S = \text{cierre entero de } A_S \text{ en } B_S$$
+\end{teo} 
+\begin{dem}
+    Si $c\in B$ es entero sobre $A$, $c\in B_S$ entero sobre $A_S$, luego $\frac{c}{s}\in B_S$ entero sobre $A_S$ por ser $\frac{c}{s} =c \cdot \frac{1}{s}$ y $\frac{1}{s} \in A_S$ entonces es entero, y $c$ ya era entero. Demostramos as\'i que $C_S \subseteq$cierre entero de $A_S$ en $B_S$.
+
+    Sea $\frac{b}{s} \in B_S$ entero sobre $A_S$, entonces
+    $$\left( \frac{b}{s} \right)^{n} + \frac{a_1}{s_1} \left( \frac{b}{s} \right)^{n-1} + \cdots  + \frac{a_n}{s_n} = 0$$
+    llamando $t = s_1\cdots s_n$, entonces, multiplicando por $t^n$ y 
+    $$\left( \frac{tb}{s} \right)^{n} + \underbrace{\frac{a_1}{s_1} \cdot t}_{\in A} \cdot \left( \frac{tb}{s} \right)^{n-1} + \cdots  + \frac{a_n}{s_n} t^n = 0$$
+    y as\'i, $\frac{tb}{s} \in C$, es decir, 
+    $$\frac{b}{s} = \frac{tb}{ts} = \left( \frac{tb}{s} \right) / t = \frac{\text{entero}}{t}$$
+\end{dem}
+\begin{cor}
+    $A$ es normal $\iff \, A_\p$ es normal $\forall \, \p \in Spec\, A$
+\end{cor}
+\begin{dem}
+    $\Rightarrow)$ Si $A$ es normal, su cierre entero $\bar A = A$, y localizando, $\overline{(A_\p)} = (\bar A)_\p = A_\p$.
+
+    $\Leftarrow)$ $\bar A / A$ como $A$-m\'odulo es $\bar A_\p = A_\p, \, (\bar A)_\p / A_\p = 0 \Rightarrow (\bar A / A)_\p = 0 \, \forall \, \p \Rightarrow A=\bar A$
+\end{dem}
+\begin{obs}[M\'etrica de la traza]
+    Dada una extensi\'on de cuerpos $\Sigma \hookrightarrow L$, $L$ es $\Sigma$-espacio vectorial de dimensi\'on finita. Para cada $b\in L$, se define la homotecia $h_b : L \longrightarrow L$ que es $\Sigma$-lineal, y $h_b$ tiene una traza y el primer coef. del polinomio caracter\'istico, que no depende de bases, luego llamamos $Tr(b) = Tr(h_b) \in \Sigma$. Como la traza es una aplicaci\'on lineal $Tr : L \longrightarrow \Sigma$ y define un producto escalar $T_2(b,b') = Tr(b \cdot b')$. Adem\'as, no depende de cambios de bases pues si $\Sigma\longrightarrow K$, $\Sigma_K = \Sigma\underset{\Sigma}{\otimes} K = K \hookrightarrow L_K = L\underset{\Sigma}{\otimes} K$, $K 
+    \hookrightarrow L_K$, y si $b\in L$, $b\otimes 1\in L_K$ tiene la misma matriz que $b$, por lo que la m\'etrica es la misma, y la traza tambi\'en. Como en las \'algebras separables hay una extensi\'on que las trivializa, $L_K = K^n$, elegimos la base can\'onica $\{e_i\}$, de forma que la matriz es todo 0 menos 1 en la posici\'on $ii$, luego $Tr(e_ie_j) = Tr(0) = 0$ y $Tr(e_ie_i) =Tr(e_i)=1$, y as\'i la extensi\'on es separable si y solo si la m\'etrica es irreducible.
+
+    \textcolor{red}{Pedir} 
+     
+     Se tiene que existe una extensi\'on que trivializa a $L$, $K \longrightarrow L_K = L\otimes_{\Sigma} K = K \times \cdots \times K$, con 
+$$\bt L_K \rar[equal] & K^n \\[5mm] L\arrow[hook]{u} \arrow{ur}  \et \qquad \bt b\otimes 1  \rarmaps & b \\[5mm] b \arrow[mapsto]{u} \arrow[mapsto]{ur}  \et$$
+
+$$h_{(\lambda_1, \ldots, \lambda_n)}  =\begin{pmatrix}
+    \lambda_1 \\ & \ddots \\ & & \lambda_n
+\end{pmatrix} \qquad Tr(h_{(\lambda_1, \ldots, \lambda_n)}) = \lambda_1 + \cdots + \lambda_n$$
+$$h_{(\lambda_1, \ldots, \lambda_n)}(e_i) = (\lambda_1, \ldots, \lambda_n )(0,\ldots, 1, 0, \ldots, 0) = (0,\ldots,\lambda_i, 0, \ldots, 0) =\lambda_i (0,\ldots, 1, 0, \ldots, 0) = \lambda_i e_i$$
+$Tr(b) = \sigma_1(b) + \cdots + \sigma_n(b)$ con $\sigma: L \hookrightarrow K$, por lo que $b$ es entero, y $\sigma_i(b)$ es tambi\'en entero y por tanto $\sum \sigma_i(b) = Tr(b) \in \Sigma \Rightarrow Tr(b)\in A$
+\end{obs}
+\begin{obs}
+    Se tiene $\bar \Sigma = \overline{A_{(0)}} = \overline{(A_S)} = \bar A_S = L$ y entonces $\bar A_0= L$. Entonces $L = \bar A_0 = \left\{\frac{\text{enteros}}{a}, \, 0 \neq a \in A\right\}$. $L$ tiene una base $\{b_1, \ldots, b_n\}$ sobre $\Sigma$ formada por elementos enteros sobre $A$. Sea $\omega_1, \ldots, \omega_n$ ka base dual de $L^*$ como $\Sigma$-espacio vectorial, s etiene la polaridad $\phi_{T_2}: L \longrightarrow L^* =  \Sigma \omega_1\oplus \cdots \Sigma \omega_n$, y como $\bar A \subset L$, se tiene la restricci\'on
+    $$\bt \bar A \rar[hook] & A \omega_1 \oplus \cdots \oplus A \omega_n \subset L^* \et$$
+    por lo que el transformado de un entero ser\'ia una combinaci\'on lineal de las $\omega_i$. Es decir, falta demostrar que si $b \in L$ es entero, $\phi_{T_2}(b) = a_1 \omega_1 + \cdots + a_n \omega_n$ con $a_i \in A$. Entonces $a_i = \left( \phi_{T_2}(b) \right)(b_i) = T_2(b,b_i) = Tr(b\cdot b_i)$ y como $b$ y $b_i$ son enteros, $b\cdot b_i$ es entero y la traza de un entero est\'a en $A$, por lo que $Tr(b\cdot b_i) \in A$. 
+\end{obs}
+\begin{teo}
+    $A$ \'integro normal noetheriano y $ \Sigma = A_o \longrightarrow L$ una extensi\'on finita separable, entonces el cierre entero de $A$, $\bar A$ en $L$ es un $A$-m\'odulo finito. 
+\end{teo}\begin{dem} 
+\end{dem}
+\begin{ejem}
+    Sea $A=\bb Z, \, \bb Q \hookrightarrow L$ una extensi\'on finita, entonces $\bb Z \subset \bb Q$, $\bar {\bb Z}$ es un $\bb Z$-m\'odulo finito y libre de torsi\'on, por ser \'integro conteniendo a $\bb Z$. 
+
+    $\bb Z[i] = \bar {\bb Z}$ con la extensi\'on $\bb Q \hookrightarrow \bb Q[i]$ pues $\bb Z[i]$ es de ideales principales, luego es normal. No vale para cualquier extensi\'on por ra\'iz, si usamos $\varepsilon \in \mu_5$, $\bb Q \hookrightarrow \bb Q[\varepsilon]$ no hace que $\bar {\bb Z} \neq \bb Z[\varepsilon]$ pues no es de ideales principales. En el caso de $\mu_3$ s\'i se cumple.
+\end{ejem}
+   Si $A = k[\xi_1,\ldots, \xi_n], \, \Sigma=A_0, \Sigma \longrightarrow L$ una extensi\'on finita, $\bar A$ el cierre entero de $A$ en $L$ es $A$-m\'odulo finito si
+    \begin{itemize}
+        \item $A$ es normal noetheriano y $\Sigma \longrightarrow L$ es separable (ejemplo $A = \bb Z, \, \bb Q \longrightarrow L$ cualquiera). 
+    \end{itemize} 
+    
+\begin{teo}[Finitud del cierre entero en extensiones] 
+Si $A = k[\xi_1, \ldots, \xi_n]$ con $k$ cuerpo arbitrario y $\Sigma \longrightarrow L$ es una extensi\'on finita. Entonces $\bar A$ es finito sobre $A$. 
+\end{teo}
+\begin{dem}
+    Por el teorema de Noether existe un morfismo $k[x_1, \ldots,x_s]\hookrightarrow A$ finito. Como $A = k[x_1, \ldots, x_n]$, consideramos otra extensi\'on $\Sigma \hookrightarrow L \hookrightarrow \bar L$, $\bar A_L \subset \bar A_{\bar L}$ entonces si $\bar A_{\bar L}$ es finito entonces $\bar A_L$. 
+
+    Una extensi\'on $\Sigma \hookrightarrow K$ es normal cuando $K\underset{\Sigma}{\otimes} K$ es racional. Hacemos que $\Sigma \hookrightarrow \bar L$ sea normal, de grupo $G = Aut_{\Sigma-alg}(\bar L)$ y se tienen las extensiones $\Sigma \hookrightarrow \bar L^G \hookrightarrow \bar L$ siendo la segunda de Galois por el Teorema de Artin. Supongamos que $\Sigma \hookrightarrow L$ es puramente inseparable (universalmente local, tiene que tener $ch \neq 0$). Sea $p=ch(\Sigma)$, $\Sigma \hookrightarrow L \iff \,\forall\, \beta \in L,n \in \bb N,  \beta^{p^n} \in \Sigma$, $\beta^{p^n} = \lambda \in \Sigma, \, x^{p^n} - \lambda = 0 = (x-\beta)^{p^n}$ es irreducible pues tiene una sola ra\'iz. Recordemos que como $k[x_1, \ldots, x_n]$ es un dfu, es \'integramente cerrado.
+
+    $L=\Sigma(\beta_1, \ldots, \beta_r) =\left( \overline{k[x_1, \ldots, x_n]}\right)_{k[x_1, \ldots, x_n]_o} \Rightarrow \beta_1, \ldots, \beta_r$ son enteros sobre $A$, $\beta^{p^n} \in\Sigma \Rightarrow \beta^{p^n}\in A$. Escogemos la mayor $n$ de todas las $\beta_i$ y entonces $\beta_i^{p^n} \in A$, es decir, $L=\Sigma(\sqrt[p^n]{a_1}, \ldots, \sqrt[p^n]{a_r})$ siedo $a_i = \sum \lambda_{i_1\cdots i_r}^{(i)} x^{i_1}_1 \cdots x^{i_n}_n$ con $\lambda\in k\Rightarrow \sqrt[p^n]{a_i} = \sum \sqrt[p^n]{ \lambda_{i_1\cdots i_r}^{(i)}}  (\sqrt[p^n]{x_1})^{i_1} \cdots (\sqrt[p^n]{x_n})^{i_n} $ de forma que 
+    $$L \subset k \left( \sqrt[p^n]{ \lambda_{i_1\cdots i_r}^{(i)}}, \ldots \right)\left(\sqrt[p^n]{x_1}, \ldots,  \sqrt[p^n]{x_m}\right) = K\left(\sqrt[p^n]{x_1}, \ldots,  \sqrt[p^n]{x_m}\right) = K(y_1, \ldots, y_m) \hookleftarrow k$$ y son variables independientes. As\'i, $K[y_1, \ldots, y_m]\subset K(y_1, \ldots, y_m)$ es el cierre entero de $k[x_1, \ldots, x_m]$. $k[x_1, \ldots, x_m] \subset K[y_1, \ldots, y_m]$ es entero, y $K[y_1, \ldots, y_m]\subset K(y_1, \ldots, y_m)$ es \'integramente cerrado y es finito, entonces es el cierre entero. 
+\end{dem}
+
+\begin{defi}
+    $p(x)$ es \textbf{puramente inseparable} cuando solo tiene una ra\'iz. Si lo es, $\modulo{k[x]}{(p(x))}$ es local, y se demuestra que $p(x) = x^{p^m} - \lambda$. 
+\end{defi}
+Dado $A = k[\xi_1, \ldots, \xi_n]$ \'integro y noetheriano de dimensi\'on 1, o dominio de Dedekind. Si $\Sigma = k(\xi_1, \ldots, \xi_n) \hookrightarrow k(\beta_1, \ldots, \beta_s) = L$ es una extensi\'on finita, entonces $\bar A_L = k [\gamma_1, \ldots, \gamma_s]$.
+
+Si $\bb Z[\xi_1, \ldots, \xi_n]$, $\bb Q \hookrightarrow L$ extensi\'on finita, $\bar{\bb Z}_L = \bb Z[\gamma_1, \ldots, \gamma_s]$. 
+\section{Dominios de Dedekind}
+\begin{defi}
+    Un anillo \'integro, noetheriano e \'integramente cerrado de dimensi\'on 1 es un \textbf{dominio de Dedekind}. 
+\end{defi}
+Como $A$ es \'integramente cerrado noetheriano de dim 1$\Rightarrow$ local noetheriano int. cerrado de dim 1 $\Rightarrow$ Anillo de valoraci\'on discreta ($\iff$ noetheriano) $\Rightarrow$ anillo local de ideales principales $\Rightarrow$ anillo local regular noetheriano. En sentido contrario, como $\bar A = \bigcap_{A \subset \mc V} \mc V$ y $A \hookrightarrow \mc V$ factoriza por $A \rightarrow A_\p \hookrightarrow \mc V$ y $A_\p$ es de valoraci\'on, dominado por $\mc V$ luego $A_\p = \mc V$, y $\bar A = \bigcap A_\p = A$. 
+\begin{defi}
+    Un \textbf{anillo} es \textbf{artiniano} si es un anillo noetheriano de dimensi\'on 0.
+\end{defi}
+Como $\p_1, \ldots, \p_n$, las cadenas son de longitud 1 luego no hay ning\'un primo dentro de otro, y todos son maximales, que es lo mismo que haya un n\'umero finito de minimales. Tambi\'en son maximales. $\m_1\supset \m_1\cdot\m_2\supset \cdots \m_1\cdots \m_n $ y $\m_1\cdots \m_n \subset \m_1 \cap \cdots \cap\m_n=Rad(A)$, pero $\m_1^s \cdots \m_n^s = 0$, 
+$$A \supset \m_1 \supset \m_1^2 \supset \cdots \supset  \m_1^s \supset \m_1^s\m_2 \supset \cdots \supset \m_1^s\m_2^s\supset \cdots \supset 0$$
+entonces $\m_1^s \cdots \m_r^s \m^i_{r+1} \supset \m_1^s \cdots \m_r^s \m^{i+1}_{r+1}$ y $\modulo{\m_1^s \cdots \m_r^s \m^i_{r+1}}{\m_{r+1} (\m_1^s \cdots \m_r^s \m^i_{r+1})}$ es $\modulo{A}{\m_{r+1}}$-m\'odulo finito generado. 
+
+$M = M_1\times \cdots \times M_n$ siendo $M_i$ $A_{\m_i}$-m\'odulos por el morfismo $M \longrightarrow M_{\m_1} \times \cdots\times M_{\m_n}$. En $A_{\m_i}$ es $\m_i = (t_i)$ en $A_{\m_i}$, entonces $I \subset A_{\m_i}$ ideal es $I = (t^h)$ y todo ideal es mon\'ogeno. 
+\begin{teo}
+    [de factorizaci\'on de ideales] Sea $A$ dominio de Dedekind, $I = \p_1^{n_1} \cdots \p_s^{n_s}$
+\end{teo}
+\begin{dem}
+    $(I)_0= \{\p_1, \ldots, \p_s\}$, $I_{\p_i} = \p_i^{n_i} A_{\p_i}$ luego $\p_1^{n_1} \cdots \p_s^{n_s}, \, I \subset A$ y $(\p_j)_{\p_i} = A_{\p_i}$. Al localizar $\p_1^{n_1} \cdots \p_s^{n_s} = I$
+\end{dem}\begin{prop}
+    Sea $A$ \'integro noetheriano de dimensi\'on 1, entonces es \'integramente cerrado si y solo si es local de ideales principales.
+\end{prop}
+\begin{dem} Si $A$ \'integro $\Rightarrow \bar A = A \Rightarrow A_{\p} = (\bar A)_\p = \overline{(A_\p)} \Rightarrow A_\p$ es \'integramente cerrado. 
+
+$A$  \'integramente cerrado $\iff \modulo{\bar A}{A} = 0 \iff \left( \modulo{\bar A}{A} \right)_\p = 0 \iff \modulo{\bar A_\p}{A_\p} = 0 = \modulo{\overline{A_\p}}{A_\p} =0 \, \forall \, \p \in Spec\, A$. 
+\end{dem}
+\begin{lem}
+    $\mc O$ local noetheriano de dimensi\'on 1, es \'integramente cerrado $\iff$ es de ideales principales.
+\end{lem}
+\begin{dem}
+    $\Rightarrow)$  $\m \subset \mc O$ veamos que $\m$ es principal. Sea $t\in \m$, $\modulo{\mc O}{t\mc O} \supset \bar \m$, $\bar \m^n= 0$ para alg\'un $n$ luego $\m^n \subset t \cdot \mc O$ es decir que $\mc O$ es dimensi\'on 1. Elegimos $n$ m\'inimo $n>1$, luego $\m^{n-1} \not\subset t\cdot \mc O$, $\xi\in \m^{n-1} - t\mc O$, $t\mc O \in \m \subset t\mc O \Rightarrow \m =t\mc O$. $\xi \cdot \m \in \m^{n-1} \cdot \m = \m^n \subset t\mc O$, luego $\frac{\xi}{t}\cdot \m \subset \mc O, \frac{\xi}{t} \nin \mc O$ y tenemos dos opciones
+    $$\frac{\xi}{t} \cdot  \m = \mc O \text{   \'o   } \frac{\xi}{t} \cdot  \m \subset \m$$
+    y si fuera cierta la primera, $\m = \frac{t}{\xi} \cdot \mc O$, es mon\'ogeno. Tenemos 
+    $$\bt h_{\frac{\xi}{t}} : \m \rar & \m \\[-5mm] m \rarmaps & \frac{\xi}{t} \cdot m \et$$
+    y $P(h_{\nicefrac{\xi}{t}}) = h_{P(\nicefrac{\xi}{t})} =0$ siendo $P$ el polinomio caracter\'istico, entonces $P(\xi/t) = 0 \Rightarrow \frac{\xi}{t}$ es entero sobre $\mc O$.
+
+    $\Leftarrow)$ Inmediato
+\end{dem}
+\section{M\'odulos proyectivos}
+Sea $A$ anillo, $M$ un $A$-m\'odulo.
+\begin{teo}
+    Si $(*) = 0 \longrightarrow N_1 \longrightarrow N_2 \longrightarrow N_3 \longrightarrow 0$ es exacta, entonces $Hom_A(M,(*))$ es exacta por la izquierda: $ 0\longrightarrow Hom_A(M,N_1) \longrightarrow Hom_A(M,N_2) \longrightarrow Hom_A(M,N_3) $. 
+\end{teo}
+\begin{defi}
+    Un \textbf{m\'odulo} $M$ se dice \textbf{proyectivo} si $Hom_A(M,(*))$ es exacta, por la derecha y por la izquierda.
+\end{defi}
+\begin{obs}
+    Y no es exacta por la derecha porque un morfismo $M \longrightarrow N_3$ no extiende por
+    $$\bt  & M \arrow{d} \arrow[dashed]{dl}  \\[5mm] N_2 \rar & N_3 \rar & 0 \et$$ 
+\end{obs} 
+    Si $M \simeq A^{I}$ es libre entonces $\displaystyle Hom_A(A^I,N) = \prod_{i \in I}N$ y entonces
+    $Hom(A^I, (*))$ es exacta por la derecha pues $\prod N_2 \longrightarrow \prod N_3$ es trivialmente epiyectivo. Esto es, $M$ es un m\'odulo proyectivo.
+    \begin{lem}
+        $\left( Hom_A(A\oplus \cdots \oplus A, N) \right)_\p = Hom_{A_\p}( A_\p \oplus \cdots A_\p, N_\p)$.
+    \end{lem}
+    \begin{dem}
+        $$\left( Hom_A(A\oplus \cdots \oplus A, N) \right)_\p = (N\times \cdots \times N) _ \p =$$
+        $$=(N \oplus \cdots \oplus N)_\p = N_\p \oplus \cdots \oplus N_\p = N_\p \times \cdots \times N_\p =  Hom_{A_\p}( A_\p \oplus \cdots A_\p, N_\p)$$
+    \end{dem}
+    \begin{defi}
+        Un \textbf{m\'odulo} es \textbf{de presentaci\'on finita} si $\bar L \longrightarrow L \longrightarrow M \longrightarrow 0$ siendo $L, \bar L$ libre finitos. Dar $L\longrightarrow M \longrightarrow 0$ es dar un sistema de generadores.
+    \end{defi}
+\begin{teo}
+Si $M$ es de presentaci\'on finita y $N$ cualquiera y $\p \in Spec\, A$ se verifica que 
+$$Hom_A(M,N)_\p = Hom_{A_\p} (M_\p, N_\p)$$
+\end{teo}
+\begin{dem}
+    Dada $L_2\longrightarrow L_1 \longrightarrow M \longrightarrow 0 (*)$ y al tomar $Hom(-,N)_\p$, 
+    $$\bt Hom_A(L_2, N)_\p \arrow[equal]{d} & \arrow{l} Hom_A(L_1, N)_\p \arrow[equal]{d} & \arrow[equal]{d} \arrow{l} Hom_A(M, N)_\p & \arrow{l} 0 \\[-5mm]
+    Hom_{A_\p}((L_2)_\p, N_\p) & \arrow{l} Hom_{A_\p}((L_1)_\p, N_\p) & \arrow{l} Hom_{A_\p}(M, N_\p) & \arrow{l} 0
+    \et$$
+    y localizando en $\p$ y tomar $Hom_{A_\p}(-, N_\p)$, 
+    $$\bt (L_2)_\p  \rar & \rar (L_1)_\p & \rar M_\p & 0 \\[-5mm] 
+    Hom_{A_\p}((L_2)_\p, N_\p) & \arrow{l} Hom_{A_\p}((L_1)_\p, N_\p) & \arrow{l} Hom_{A_\p}(M_\p, N_\p) & \arrow{l}0\et$$
+     de forma que $Hom_{A_\p}(M, N_\p) = Hom_{A_\p}(M_\p, N_\p)$ pues el \'ultimo morfismo de ambas sucesiones son el mismo morfismo. 
+\end{dem}
+\begin{teo} Si $M$ es localmente libre de presentaci\'on finita, entonces es proyectivo.
+\end{teo}
+\begin{dem}
+     Si $N_2\longrightarrow N_1 \longrightarrow 0$ , 
+     $$\bt Hom_{A_\p} (M_\p, (N_1)_\p) \rar & Hom_{A_\p} (M_\p, (N_2)_\p) \rar & 0 \et$$
+     siendo $M_\p$ un $A_\p$-m\'odulo libre finito, luego proyectivo, de forma que $(N_1)_\p \longrightarrow (N_2)_\p$ es epiyectiva y por tanto $N_1 \longrightarrow N_2$ tambi\'en.
+\end{dem}
+\begin{lem}
+    Sea $P$ proyectivo, toda sucesi\'on exacta de la forma
+    $$\bt 0 \rar & N_1 \rar & N_2 \rar{\pi} & P \rar & 0 \et$$
+    rompe con $N_2 \simeq N_1 \oplus P$.
+\end{lem}
+\begin{dem} La sucesi\'on rompe 
+    $$ \bt & N_1 \arrow[phantom]{d}{\cap} \arrow[swap]{dl}{i} \\[-5mm] N_2 \rar{\sim} \arrow{dr}{\pi} & N_1\oplus P \arrow{d} \\ & P  \et \iff \exists \, s : P \longrightarrow N_2 \, / \, \pi \circ s = Id_P $$
+    $$\bt N_2 \rar{\sim}\arrow{dr}{\pi} & N_1 \oplus P \arrow{d}{\bar \pi} & \arrow[hook]{l} \arrow{dl}{Id} P \\ & P  \et \qquad \bt N_2\simeq N_1\oplus P \arrow{d}{\pi} & \arrow[hook]{l} P \arrow[bend right=10mm]{l}{s} \arrow[equal]{dl}\\ P \et$$
+    y as\'i encontramos $s$. 
+
+    Dado $P\oplus N_1 \longrightarrow N_1$ es dar dos morfismos $s: P \longrightarrow N_2$ y $i: N_1 \longrightarrow N_2$ queda comprobar que es isomorfismo. 
+\end{dem}
+
+
+\section{Clasificaci\'on de m\'odulos sobre dominios de Dedekind}
+Sea $A$ d.d.D y $M$ un $A$-m\'odulo finito generado, $\Sigma=A_o$, se tiene
+$$\bt 0 \rar & T(M) \rar& M \rar{\phi} & M_{\Sigma} \\[-5mm] & & m \rarmaps & \frac{m}{1} \et$$
+y $T(M) = \{m\in M / \exists 0\neq a \in A / am=0\}$. $M$ se dice libre de torsi\'on cuando $T(M) =0$. $M$ es de torsi\'on si $M=T(M)$. $0 \longrightarrow T(M) \longrightarrow M \longrightarrow \phi(M) \longrightarrow 0$ siendo $\phi(M)$ libre de torsi\'on, localmente rompe y es
+$$\bt M \supset A_{\bar \m_1} + \cdots +A_{\bar \m_n} \rar & A \oplus \cdots \oplus A \subset \phi(M)\\[-5mm] a_1\bar m_1 + \cdots + a_n \bar m_n  \rarmaps & a_1 e_1 + \cdots + a_n e_n = 0 \et $$
+luego $M = (A^n) \oplus T(M)$
+\begin{teo}
+    Se tiene que para d.i.p. $M=A^n \displaystyle \bigoplus_i \left( \modulo{A}{p_i^{n_i}} \right)^{k_i}$
+\end{teo}
+\begin{lem}
+    [Teorema de factorizaci\'on de ideal] Todo ideal descompone en potencias de primos $I = \p_1^{n_1} \cdots \p_k^{n_k}$. Localmente es cierto, luego es cierta en general.  
+\end{lem}
+\begin{defi}
+    $M$ se dice \textbf{libre de torsi\'on} si $T(M)=0$. $M$ se dice de torsi\'on cuando $T(M)=M$ ($\iff M_o=0$).
+\end{defi}
+\begin{defi}
+    $rango(M) = \dim_{\Sigma} M_o$. 
+\end{defi}
+\begin{prop}
+    $rango(T(M)) = 0$.
+\end{prop}
+\begin{lem}
+    La torsi\'on localiza, es decir, $T_A(M)_\p = T_{A_\p} (M_\p)$
+\end{lem}
+\begin{teo}
+    $M$ f.g. es libre de torsi\'on si y solo si es localmente libre (si $A$ es d.i.p., $M$ es libre de torsi\'on si y solo si es libre). 
+\end{teo}
+\begin{dem}
+    Por el lema, $T_A(M) = 0 \iff T_{A_\p}M_\p =0 \iff M_\p$ es un $A_\p$-m\'oudlo libre $\forall \, \p \in Spec\, A$ 
+\end{dem}
+\begin{custom}
+    [Primer Teorema de Descomposici\'on] Todo m\'odulo $M$ descompone de modo \'unico salvo isomorfismos (en los sumandos) como $M \simeq T \oplus \mathscr L$. Adem\'as, $T=T(M)$ de torsi\'on y $\mathscr L\simeq \modulo{M}{T(M)}$ localmente libre. Es decir, si $M = T' \oplus \mathscr L'$, entonces $T\simeq T'$ y $\mathscr L\simeq \mathscr L'$. 
+\end{custom}
+\begin{dem}
+    Escogemos la sucesi\'on exacta  
+    $$\bt 0 \rar & T(M) \rar& M \rar{\phi} \arrow{d} & \modulo{M}{T(M)} \arrow[hook]{dl} \rar & 0 \\[5mm] & & M_o &  \et$$
+    y como $M_o$ es $\Sigma$-espacio vectorial, es libre de torsi\'on y por tanto $\modulo{M}{T(M)}$ es libre de torsi\'on (porque se sumerge en \'el) y por el teorema anterior, es localmente libre, y por tanto es proyectivo. Entonces tiene una secci\'on y la sucesi\'on exacta rompe, de forma que $M = T(M) \oplus \modulo{M}{T(M)}$. 
+
+    La unicidad es directa por ser $T=T(M)$ y $\mathscr L = \modulo{M}{T(M)}$. Pues si $M = T'\oplus \mathscr L'$,
+    $$T(M) = T(T') \oplus \cancelto{0}{T(\mathscr L')} = T' $$
+\end{dem}
+\subsection{Clasificaci\'on de los m\'odulos de torsi\'on f.g.}
+\begin{teo}
+    $$M = \bigoplus_{\p \in Spec\, A} \bigoplus_{n \in \bb N} \left( \modulo{A}{\p^n} \right)^{k_{\p,n}}$$
+    siendo $\p$ los divisores elementales y $k_{\p,n}$ el n\'umero de veces que aparecen, y clasifican. 
+\end{teo}
+\begin{dem}
+El teorema es cierto para d.i.p., $M$ es de torsi\'on, por tanto, $I=An_A(M)\neq 0$, y los generadores est\'an anulados por un $a=a_1\cdots a_r$ siendo $a_i m_i = 0$, luego $a\cdot M = 0$. De esta forma, $M$ es un $\modulo{A}{I}$-m\'odulo, y $\{\p_1, \ldots, \p_s\} = (I)_o$ luego $M_{\p_i}$ es un $\modulo{A_{\p_i}}{I \cdot A_{\p_i}}$-m\'odulo, es un m\'odulo con anulador no nulo, es decir, $M_{\p_i}$ es un $A_{\p_i}$-m\'odulo de torsi\'on. Usando el teorma, 
+$$M_{\p_i} \simeq \bigoplus_n \left(\modulo{A_{\p_i}}{\p_i^n \cdot A_{\p_i}}  \right)^{k_{\p_i, n}} =\bigoplus_n \left(\modulo{A}{\p_i^{n} }  \right)^{k_{\p_i, n}}  $$
+con el morfismo dado por 
+$$\bt M \rar{\sim} & \displaystyle \bigoplus_{i=1}^s M_{\p_i} \rar[equal] &[-7mm] \displaystyle \bigoplus_{\p_i} \bigoplus_n \left( \modulo{A}{\p_i^n} \right)^{k_{\p_i, n}} \et$$
+y al localizar es isomorfismo, luego es isomorfismo. 
+\end{dem}
+\begin{cor}
+    Si $M$ de torsi\'on, entonces es de la forma
+    $$M = \bigoplus_{\p \in Spec\, A} \bigoplus_{n_\p \in \bb Z} \left( \modulo{A}{\p^{n_\p}} \right)^{k_{\p,n}}$$
+\end{cor}
+\subsection{Clasificaci\'on de m\'odulos localmente libres f.g.}
+\begin{lem}
+    Si $M$ es libre de torsi\'on, se puede sumergir en un libre del mismo rango. 
+\end{lem}
+\begin{dem}
+    $M \hookrightarrow M_o$ es inyectivo y $M_o = \Sigma$-espacio vectorial de rango el de $M$, entonces $M_o = \Sigma \oplus \cdots \oplus \Sigma = \Sigma^r \supset A\oplus \cdots \oplus A $. Existe $a\in A$ tal que $a\cdot M \subset A\oplus \cdots \oplus A $, pero $M \simeq a\cdot M$ pues $a\cdot $ es inyectivo, y $M\hookrightarrow A\oplus \cdots \oplus A $. $M$ es finito generado, luego $M = \langle (\frac{a_{11}}{s_{11}}, \ldots, \frac{a_{r1}}{s_{r1}}), \ldots, (\frac{a_{1h}}{s_{1h}}, \ldots, \frac{a_{rh}}{s_{rh}}) \rangle$, y al multplicar por $a = s_{11} \cdots s_{r1} \cdots s_{1h}\cdots s_{rh}$ y son vectores de $A\oplus \cdots \oplus A $, es decir, $a\cdot M \subset A\oplus \cdots \oplus A $.
+\end{dem}
+\begin{cor}
+    $M$ f.g. es libre de torsi\'on de rango 1 $\iff$ $M\simeq $ ideal propio de $A$. 
+\end{cor}
+\begin{dem}
+    $M \overset{i}{\hookrightarrow} A \Rightarrow M \simeq Im \, i \subset A$.
+\end{dem}
+\begin{lem}
+    $I,I'\subset A$ no nulos $I\simeq I' \iff f\in \Sigma$ tal que $I  = f\cdot I'$ (en $\Sigma$). 
+\end{lem}
+\begin{dem}
+    $\Rightarrow)$ Tenemos el isomorfismo
+    $$\bt   I ' \rar{\sim} & f\cdot I' \\[-5mm]  b \rarmaps & f\cdot b \et $$
+    y si $I = f\cdot I' \simeq I'$, entonces $I \simeq I'$.
+
+    $\Leftarrow)$ Si $I \simeq I'$, $\varphi: I \overset{\sim}{\longrightarrow} I'$, al localizar
+    $$\Sigma = I_o \overset{(\varphi)_o}{\longrightarrow} I_o' = \Sigma$$
+    y $(\varphi)_o$ es endomorfismo de $\Sigma$, pero todo endomoprfismo es una homotecia, $(\varphi)_o=h_f$ y $(\varphi)_o|_I$ es 
+    $$f\cdot I = h_f(I) = \varphi(I) = I'$$
+    como quer\'iamos ver, aunque es del rev\'es.
+\end{dem}
+\begin{prop}
+     $M$ f.g. es localmente libre de torsi\'on de rango $r$ $\iff$ $M \simeq I_1\oplus \cdots \oplus I_r$. En particular, $M$ es finito generado libre de torsi\'on $\iff$ es localmente libre. 
+\end{prop}
+\begin{dem} $\Rightarrow)$
+    Por inducci\'on sobre $r$. Si $r=1$, ya hemos demostrado que $M\simeq I$. Supongamos cierto para $r-1$, consideramos un $0\neq m \in M$, $\langle m \rangle \subset M$, de forma que si $\modulo{M}{\langle m\rangle}$ no tiene torsi\'on, se tiene la s.e.
+    $$\bt 0 \rar & \langle m\rangle \simeq A \rar &M  \rar & \modulo{M}{\langle m\rangle} \rar & 0  \et$$
+    entonces $rango\left( \modulo{M}{\langle m\rangle} \right)=r-1$, y verifica el teorema, es suma de ideales, localmente y proyectivo, por lo que la sucesi\'on rompe, luego $M = \langle m\rangle \oplus \text{suma de ideales} = A  \oplus \text{suma de ideales}$. Supongamos que tiene torsi\'on, entonces $T\left(  \modulo{M}{\langle m\rangle}  \right) = \bar T$, por el paso al cociente
+    $$\bt 0 \rar & \langle m\rangle \rar & M \rar{\pi} &  \modulo{M}{\langle m\rangle}  \rar & 0\\[-5mm] 0 \rar & \langle m\rangle \rar & \arrow[phantom]{u}{\cup} \pi^{-1}(\bar T) \rar & \arrow[phantom]{u}{\cup} \bar T \rar & 0 \et$$
+    como $rango(\langle m \rangle)=1$ y $rango(\bar T) = 0$, $rango(\pi^{-1}(\bar T)) =1$ y haciendo cociente se tiene la sucesi\'on exacta
+    $$\bt 0 \rar &\pi^{-1}(\bar T) \rar & M \rar & \modulo{\left( \modulo{M}{\langle m \rangle} \right)}{\bar T} \rar & 0 \et$$
+    siendo $\modulo{\left( \modulo{M}{\langle m \rangle} \right)}{\bar T}$ libre de torsi\'on, luego $rango(\pi^{-1}(\bar T))=1$, y es isomorfo a un ideal y $M = I \oplus \text{suma de ideales}$ y hemos terminado. 
+
+    $\Leftarrow)$ Trivial.
+\end{dem}
+
+
+\begin{teo}
+    Todo m\'odulo f.g. libre de torsi\'on $M$ descompone de modo \'unico (en los sumandos) 
+    $$M\simeq I \oplus A^{r-1}$$
+    siendo $r=rango(M) = \dim_{\Sigma} M_o$.
+\end{teo}
+\begin{dem}
+    \underline{Unicidad.} $M = I \oplus A^{r-1} = \bar I \oplus A^s$, si $r=rango(M)$, $s=r-1$ pues el rango de un ideal es 1. Adem\'as, $\bar I \simeq I$, pues se calcula aplicando el \'algebra exterior a $M=I\oplus A^{r-1}$, entonces $\bigwedge_A^r M\simeq I$ por las propiedades pues $\bigwedge^i(M_1 \oplus M_2) = \bigoplus_{r+s=i} \bigwedge^r(M_1) \otimes \bigwedge^s(M_2)$, si $rango(M_i) = r_i$, $r\le r_1, \, s\leq r_2$ y $\bigwedge^{r_1+r_2 }(M_1 \otimes M_2) = \bigwedge^{r_1}(M_1) \otimes \bigwedge^{r_2}(M_2)$, entonces
+    $$\bigwedge^r(M) = I\underset{A}{\otimes}\bigwedge^{r-1}(A^{r-1}) \simeq I\underset{\cancel{A}}{\otimes}\cancel{A} = I$$
+    y as\'i $I$ es \'unico. 
+
+    \underline{Existencia.} Se ve con los siguientes lemas.
+\end{dem}
+\begin{lem}[1]
+    Dados $\p_1, \ldots, \p_r$ primos de $A$, $n_1, \ldots, n_r \in \bb N$, existe $a$ tal que $\nu_{\p_i}(a) = n_i$ se anula $n_i$ veces. 
+\end{lem}
+\begin{dem}
+    $\modulo{A}{\p_1^{n_1+1}\cdots \p_r^{n_r+1}}$ son primos dos a dos, y por el teorema chino de los restos, 
+    $$\bt A\rar & \modulo{A}{\p_1^{n_1+1}} \times \cdots\times \modulo{A}{\p_r^{n_r+1}} \\[-5mm] a \rarmaps & (a_1, \ldots, a_r) \et$$
+    por ser de ideales principales, con $a_ i \in \modulo{\p_i^{n_i}}{\p_i^{n_i+1}}$. Esa $a$ verifica la condici\'on necesaria, se anula $n_i$ veces exactamente. 
+\end{dem}
+\begin{lem}[2]
+    $I_1 \oplus I_2 \simeq I \oplus A$.
+\end{lem}
+\begin{dem}
+    Supongamos que $I_1, I_2$ son primos entre s\'i, es decir, que $I_1 + I_2 = A$, entonces es inmediato por la s.e.
+    $$\bt 0 \rar &  I_1\cap I_2 \rar & I_1 \oplus I_2 \rar & I_1 + I_2 = A \rar & 0 \\[-5mm] & a \rarmaps & a\oplus -a \et$$
+    y rompe porque $A$ es proyectivo. Es decir, $I_1 \oplus I_2 \simeq I_1 \cap I_2 \oplus A$. 
+
+    Si $I_1+I_2\neq A$ se puede encontrar un $I_2' \simeq I_2$ que s\'i lo verifica. Es decir, $\frac{a}{b}\cdot I_2 = I_2'$ ideal y primo con $I_2$.
+\end{dem}
+\begin{lem}[3]
+    Para dos ideales $I_1,I_2$ existe $\bar I_1$ primo con $I_2$ y $I_1\simeq \bar I_1$. 
+\end{lem}
+\begin{dem}
+    Por el Lema (1) existe $a\in A$ con $\nu_{\p_i}(a)=n_i$, sea $I_2 = \p_1^{n_1}\cdots \p_r^{n_r} \q_1^{m_1} \cdots \q_s^{m_s}$, $I_1=\bar \p_1^{\bar n_1}\cdots \bar \p_h^{\bar n_h} \q_1^{\bar m_1} \cdots \q_s^{\bar m_s}$, es decir, las $\q_i$ son la parte com\'un, y $\p_1, \ldots, \p_r$ no son divisores de $I_1$. Entonces $a$ toma valor $\bar m_i$ en $\q_i$ y en los dem\'as $\p_i, \bar p_j$ toma valor $0$. Entonces al dividir por $a$, $\frac{1}{a}I_1\subset \Sigma$, $t_1, \ldots, t_k$ puntos donde se anula $a$ a parte de $\q_1, \ldots, \q_s$ $m_1',\ldots,m_k'$-veces. Sea $b \in A$ que se anula en $t_1, \ldots, t_k$, $m_1',\ldots,m_k'$-veces y no se anula en ninguno de $\p,\q, \bar \p$, entonces 
+    $$\frac{b}{a} \cdot I_1 \subset \Sigma$$
+    y para que el elemento pertenezca a $A$, su valoraci\'on debe ser positiva pues $A$ es la intersecci\'on de sus anillos de valoraci\'on,
+    $$\nu_x\left( \frac{b}{a} \cdot I_1 \right) = \underbrace{\nu_x(b)}_{\geq 0} - \cancelto{0}{\nu_x(a)} + \underbrace{\nu_x(I_1) }_{\geq 0} \geq 0$$
+    pues $x \neq \q_1, \ldots, \q_s, t_1, \ldots, t_k$. Para saber $\nu_x(a)>0$ tenemos los siguientes consideramos
+\begin{enumerate}
+    \item $x=\q_i$, $\nu_{\q_i} = \bar m_i$, $\nu_{\q_i}(I_1) \geq \bar m_i$.
+    \item $x=t_i$, $\nu_x(a)=m_i'$, $\nu_{t_i}(a) = m_i', \, \nu_{t_i}(b) = m_i'$
+\end{enumerate}
+demostrando as\'i que $\frac{b}{a} \cdot I_1 = \bar I_1 \subset A$ es un ideal. Veamos que es primo con $I_2$. Como 
+$$\nu_{\p_i}\left( \frac{b}{a} I_1 \right)=0 + \nu_{\p_i}(I_1) = 0$$
+pues existe $i_1 \in I_1,\, i_1 \nin \p_i$ luego $\frac{b}{a} I_1 \nin \p_i$, y
+$$\nu_{\q_i}\left( \frac{b}{a} I_1  \right) = \nu_{\q_i}(b) - \nu_{\q_i}(a)+\nu_{\q_i}(I_1) = 0 - \bar m_i + \nu_\q(\bar I \cdot a) = \cancelto{0}{\nu_{\q_i}(\bar I )} + \nu_{\q_i}(a) - \nu_{\q_i}(a)  = 0  $$
+luego $I_1 = \bar I \cdot \q_i^{\bar m_i}$, con $\bar I$ que no est\'e en $\q_i$, $\bar I = \bar p_1^{\bar n_1} \cdots \bar p_h^{\bar n_h} \q_1^{\bar m_1} \cdots \hat \q_i^{\bar m_i} \cdots $ $\nu_{\q_i}()$
+\end{dem}
+\begin{cor}
+    Si $M$ es libre de torsi\'on, entonces es
+    $$M \simeq I_1 \oplus \cdots \oplus I_r$$
+    siendo $I_i \subset A $ ideales, por lo que son localmente libres y por tanto, proyectivos.
+\end{cor}
+\begin{cor}
+    En un dominio de Dedekind un $A$-m\'odulo $M$ finito generado descompone como
+    $$ M =\underbrace{ (I \oplus A^{r-1})}_{M/T(M)} \oplus \underbrace{\bigoplus \modulo{A}{\p^n}}_{T(M)}$$
+    de forma que $T(M) =\displaystyle \bigoplus_{\p \in (An(M))_0} T(M)_\p$ y $\modulo{M}{T(M)} = I_1 \oplus \cdots \oplus I_n$. 
+\end{cor}
+\section{M\'odulos f.g. libres de torsi\'on de rango 1}
+(que son m\'odulos localmente libres de rango 1 o m\'odulos de l\'inea $\mathscr L$, ejercicio). Se verifica que si $\mathscr L_1, \mathscr L_2$ son de l\'inea, $\mathscr L_1\underset{A}{\otimes}\mathscr L_2$ es de l\'inea y $A$ es el m\'odulo de l\'inea trivial. Adem\'as $Hom_A(\mathscr L,A)=\mathscr L^{-1}$ es tambi\'en de l\'inea e inverso de $\mathscr L$, es decir, forman un grupo.
+
+$Hom_A(\mathscr L,A)_\p = Hom_{A_\p}(\mathscr L_\p, A_\p)$ siempre que $\mathscr L$ sea de presentaci\'on finita, es decir, $L_1 \longrightarrow L_2 \longrightarrow \mathscr L \rightarrow 0$ siendo $L_i$ f.gs. Adem\'as
+$$Hom_A(\mathscr L,A)_\p = Hom_{A_\p}(\mathscr L_\p, A_\p) = Hom_{A_\p} (A_\p, A_\p) = A_\p$$
+y adem\'as se tiene el isomorfismo
+$$\bt \mathscr L^{-1}\underset{A}{\otimes}\mathscr L \rar & A \\[-5mm]  Hom_A(\mathscr L, A)\underset{A}{\otimes}\mathscr L \rar & A \\[-5mm] \omega \otimes \ell \rarmaps & \omega(\ell) \et$$
+y localizando, ahora $\mathscr L$ es trivial y 
+$$\bt Hom_A(\mathscr L, A)\underset{A}{\otimes}\mathscr L \rar & A \\[-5mm]  
+Hom_A(A, A)\underset{A}{\otimes}A\rar & A \\[-5mm] a \otimes b \rarmaps & a \cdot b \et$$
+es ya isomorfismo como en $A\underset{A}{\otimes}M \simeq M$. 
+
+Sea $A$ dominio de Dedekind
+\begin{defi}
+    El \textbf{grupo de Picard} es $Pic(A) = \modulo{\text{Ideales}}{\sim}$. 
+\end{defi}
+\begin{defi}
+    Un \textbf{divisor} es una suma formal de puntos, es decir, $D=n_1 \p_1 + \cdots  + n_r \p_r$ con $n_i\in \bb Z$ y $\p_i \in Spec\, A$.  
+\end{defi}
+Podemos pensar $\mathscr L\hookrightarrow \mathscr L_{\Sigma}\simeq \Sigma$ por ser loc. libres de rango 1. 
+\begin{prop}
+    Dado $D$ un divisor, se define 
+    $$\mc O(D) = \{f\in \Sigma\, / \, \nu_{\p_i}(f) \ge n_i \, \forall \, i=1, \ldots, r\}$$
+    De manera obvia, $\mc O(D) \subset \Sigma$, y $\nu_{\p_i}(f+\bar f) \ge \min(\nu_{\p_i}(f), \nu_{\p_i}(\bar f))$, y $\nu_p(a\cdot f) = \nu_\p(a) + \nu_\p(f) \ge \nu_\p(f) \ge n_i$, y es un subm\'odulo. Adem\'as, es finito generado pues lo es localmente $\mc O(D)_\p = \mc O(D)$ si $\p \nin D$ y si $\p \in D$. 
+    
+    $\mathscr L \subset \Sigma,\, a\cdot \mathscr L=I \subset A$ por ser finito generado, $\mathscr L = \frac{1}{a} \cdot I = \frac{1}{a} \p_1^{n_1} \cdots \p_r^{n_r}$, luego $D(\mathscr L) = D(\frac{1}{a}) + n_1 \p_1 + \cdots  + n_r \p_r$, y $D(\frac{1}{a}) = \sum_{\p \in (a)_0} \nu_\p (\frac{1}{a}) \p$, la fracci\'on solo tiene valores no nulos donde la $a$ se anule, es decir, los primos que contengan a $a$, y es negativo.
+\end{prop}
+
+Sea $A$ dominio de Dedekind
+\begin{defi}
+    Se definen los \textbf{divisores} en $A$ (o en $Spec\, A$) 
+    $$Div(A) = \bigoplus_{x\in Spec\, A} \bb Z \cdot x \qquad D = n_1\p_1 + \cdots + n_k \p_k \quad n_1, \ldots, n_k \in \bb Z$$
+    y se pueden sumar como $D + D'$. 
+\end{defi}
+\begin{teo}
+    Se tiene una correspondencia biun\'ivoca entre subm\'odulos f.g. de m\'odulos de l\'inea y divisores, pues para estos subm\'odulos se tiene el isomorfismo
+    $$\bt \mathscr L\underset{A}{\otimes}\mathscr L' \rar{\sim} & \mathscr L\cdot \mathscr L' \subset \Sigma \\[-5mm] l \otimes l' \rarmaps & l \cdot l' \et$$
+    pues localmente son libres, f.g. y de rango 1, y es una epiyecci\'on que autom\'aticamente es inyecci\'on. Por tanto forman un grupo, siendo el elemento neutro $A$. Entonces $\mathscr L \cdot \mathscr L^{-1} = A$ y $\mathscr L^{-1} = Hom_A(\mathscr L,A) \subset \Sigma$, pero a su vez, $Hom_A(\mathscr L,A) \subset Hom_\Sigma(\mathscr L_\Sigma,A_\Sigma) = Hom_{\Sigma }(\Sigma,\Sigma) = $homotecias=$\Sigma$. Es decir, $Hom_A(\mathscr L,A) = \left\{\frac{a}{b} \in \Sigma\, / \, \frac{a}{b}\mathscr L \subset A \right\}$.
+    
+    $\subseteq) \, l\cdot \frac{a}{b} \in A$ porque $\frac{a}{b} \cdot \mathscr L \subset A$
+
+    $\supseteq) \, 1=\sum l\cdot \frac{a}{b}$. Sea $l \in \mathscr L$, $l=\frac{\bar a}{\bar b}$
+
+    $D(\frac{a}{b}) = D(a)-D(b) = \sum n_i \p_i$ siendo $D(a) = \sum_{x \in Spec\, A} \nu_x(a) \cdot x$, entonces los polos son aquellos $\p_i$ para los que $n_i$ son negativos y los ceros son aquellos $\p_j$ para los que $n_j$ son positivos. El resto son puntos normales.  
+\end{teo}
+\begin{ejer}
+Atiyah: No existe ningua inyecci\'on de un libre en otro de rango menor, es decir, no existe $L^n \hookrightarrow L^k$ con $k<n$.
+\end{ejer}
+\begin{defi}
+    Se define $\mc O(D) = \{f\in \Sigma\, / \, \nu_x(f) \ge D_x\}$ con $D = \sum n_i \p_i = \sum_{x\in Spec\, A} D_x \cdot x$ se le obliga a tener m\'as ceros que $f$ y que tenga como mucho los mismos polos que $f$. $\nu(a f) = \nu_x(a) + \nu_x(f) \ge D_x$, probando que forman un subm\'odulo. 
+ \end{defi}
+    Dado $\mathscr L\subset \Sigma$, $\mathscr L_\p\subset \Sigma$ es $A_\p$-m\'odulo de ideales prinicpales, luego es libre y por tanto monogenerado, es decir, $\frac{a}{b}\cdot A = \mathscr L_\p$. Se define $\nu_\p(\mathscr L)=\nu_\p(\frac{a}{b})$. Entonces $D(\mathscr L) = \sum_{\p \in Spec\, A} \nu_\p(\mathscr L) \cdot \p$, y es finito, porque existe $a\in A$ tal que $a\cdot \mathscr L\subset A$, es decir, es un ideal $a\mathscr L = \p_1^{n_1} \cdots \p_r^{n_r}$, es decir, que $\mathscr L = \frac{1}{a}  \p_1^{n_1} \cdots \p_r^{n_r}$ y como $a$ es invertible en $A_\p$, $\mathscr L_\p = (\cancel{\frac{1}{a}} \p_1^{n_1} \cdots \p_r^{n_r})_\p=A_\p$, concluyendo as\'i que $\nu_\p(\mathscr L) = 0$. 
+
+    Adem\'as, $D(\mathscr L\cdot \mathscr L') = D(\mathscr L) + D(\mathscr L')$. Dando as\'i una correspondencia $$ \bt Div(A) \rar & \text{Subm\'od. f.g. de } \Sigma \\[-5mm] D \rarmaps &\mc {O}(D) \\[-5mm] D(\mathscr L) & \arrow[mapsto]{l} \mathscr L \et$$
+    y $(D+D')_x = D_x+D_x'$ por $(\mathscr L\cdot \mathscr L')_\p = \mathscr L_\p\cdot \mathscr L'_\p = \frac{a}{b}\cdot \frac{a'}{b'} A_\p$ de forma que 
+    $$\nu_x(\mathscr L\cdot \mathscr L') = \nu_\p\left(\frac{a}{b}\frac{a'}{b'}\right) = \nu_\p\left(\frac{a}{b}\right) + \nu_\p\left(\frac{a'}{b'}\right) = \nu_\p(\mathscr L) + \nu_\p(\mathscr L) = D(\mathscr L)_\p + D(\mathscr L')_\p $$
+    entonces si $\mathscr L_\p = l \cdot A_\p = \frac{a}{b} \cdot A_\p = \bar u t^s A_\p = t^s_\p A_\p$ pues $\p \cdot A_\p = t_\p \cdot A_\p$ y por tanto $a-u\cdot t^m$ con $m \in \bb N \Rightarrow \frac{a}{b} = \bar u\cdot  t^s$ con $s\in \bb Z$. 
+
+    Por tanto, $\mathscr L_\p=t^m \cdot A_\p, \, m \in \bb Z, \, m = \nu_p(\mathscr L)=\nu_\p(\frac{a}{b})$ siendo $\mathscr L_\p = \frac{a}{b} \cdot A_\p$. Y si $\mathscr L_\p = t^m \cdot A_\p=\bar {\mathscr L}_\p=t^{\bar m} \cdot A_\p$ entonces son el mismo.
+
+    Por otro lado, si $\p \subset A$,
+    $$\nu_\q(\p) = \begin{cases}
+        0 & \text{ si } \q \neq \p \\ 1 & \text{ si } \q = \p 
+    \end{cases} ; \qquad  \begin{array}{cc}
+        \nu_\p (\p^m) = m \\ \nu_\q (\p^m) = 0 & \q\neq \p
+    \end{array}$$
+    \begin{prop}
+        $\nu_x(\mathscr L\cdot \mathscr L') = \nu_x(\mathscr L)+ \nu_x(\mathscr L')$. $D(\mathscr L) = \sum_{x\in Spec\, A} \nu_x(\mathscr L) \cdot x$, de forma que 
+        $$\bt Submod(\Sigma) \rar[hook] & Div(A) \\[-5mm] \mathscr L \rarmaps & D(\mathscr L) \et$$
+        es inyectivo.
+    \end{prop}
+    \begin{lem}
+    $D(\mathscr L\cdot \mathscr L') = D(\mathscr L) + D(\mathscr L')$
+    \end{lem}
+    $\mathscr L^{-1} = Hom_A(\mathscr L,A) = \mathscr L^* \hookrightarrow \Sigma$ asignando $T: \mathscr L \to A \longmapsto \frac{a}{b}$, le asignamos la raz\'on de la homotecia. 
+    
+    \begin{lem}
+    Localizando, como $\mathscr L_x = t^m \cdot A_\p, \, \mathscr L_x^* = t^{-m} A_\p \, \iff D(\mathscr L^*) = D(\mathscr L)$.  
+    \end{lem} 
+    \begin{dem}
+        $\mathscr L_x^* = \left(Hom_A(\mathscr L,A)\right)_x = Hom_{A_x} (\mathscr L_x, A_x) = Hom_{A_x}(t^m \cdot A_\p, A_\p) \subset A$ y localiza porque son m\'odulos de presentaci\'on finita, por ser $a\in A_\p, at^m \in A_\p \subset A_p \iff at^m \in A_\p  \iff a\in t^{-m} A_\p$.  
+    \end{dem}
+    \begin{cor}
+        Por tanto, $\mathscr L^{-1} = \mathscr L^*$, es decir, $\mathscr L \cdot \mathscr L^* = A$, por ser 
+        $$D(\mathscr L \cdot \mathscr L^*) = D(\mathscr L) + D(\mathscr L^*) = D(\mathscr L) - D(\mathscr L) = 0 =D(A)$$
+    \end{cor}
+    Hemos demostrado as\'i que $Div(A)$ es de grupo y el morfismo $submod(\Sigma)\hookrightarrow Div(A)$ es de grupos. 
+    \begin{teo}
+        La asigaci\'on $submod(\Sigma)\hookrightarrow Div(A)$ es isomorfismo de grupos. 
+    \end{teo}
+    \begin{dem}
+        Falta ver que todo divisor es divisor de alguien. Sea $D: D= \sum n_x x = n_1 \p_1 + \cdots + n_r \p_r - m_1 \q_1 - \cdots - m_s \q_s = D (\p_1^{n_1}, \ldots, \p_r^{n_r}, (\q_1^{-1})^{m_1},  \ldots, (\q_s^{-1})^{m_s}) = D(\prod_\p \p^{\nu(D_\p)}) $ siendo 
+        $$\p^n = \begin{cases}
+            (\p^{-1})^{-n} & \text{ si } n \le 0 \\ \p^n & \text{ si } n \ge 0 
+        \end{cases}$$
+        y por tanto, 
+        $$D = \cdots = n_1 D(\p_1)  + \cdots + n_r D(\p_r) + m_1 D(\q_1^{-1}) + \cdots + m_s D(\q_s^{-1}) =  n_1 \p_1 + \cdots + n_r \p_r - m_1 \q_1 - \cdots - m_s \q_s  $$
+        como quer\'iamos demostrar. 
+    \end{dem}
+    \subsection{Orden en divisores}
+    Los divisores no solo forman un grupo con la suma sino que tambi\'en tiene un orden, compatible con la ley de grupo. Para ello basta dar un orden en los positivos. 
+
+    $D$ es positivo cuado $\nu_x(D) \ge 0\, \forall \, x\in Spec\, A$.
+
+    Se dice que $D\ge D'$ cuando $D-D'\ge 0$. 
+
+    $f \in \Sigma, \, f\in A \iff D(f) \ge 0$ con $D(f)  = \displaystyle \sum_{x\in Spec\, A} \nu_x(f) \cdot x$ y una funci\'on pertenece al anillo si su valor es positivo, por ser el anillo la intersecci\'on de sus anillos de valoraci\'on. 
+
+    Recuperamos as\'i que $Pic(A) = \modulo{Submod(\Sigma)}{\sim} = \modulo{Div(A)}{\sim}$, y $\mathscr L \sim \mathscr L'$ si sus divisores cumplen que $D(\mathscr L) \sim D(\mathscr L')$. 
+
+    \begin{dem}
+        $\mathscr L\simeq \bar{\mathscr L} \iff \mathscr L\otimes \bar{\mathscr L}^{-1} \simeq A \iff \mathscr L \cdot \bar{\mathscr L}^{-1} \simeq A$. Como $\mathscr L \simeq A \iff \mathscr L$ es mon\'ogeno $\iff \mathscr L = \frac{a}{b} \cdot A \iff D(\mathscr L) = D(\frac{a}{b}=f)$. Por tanto, 
+        $$\mathscr L \simeq \bar{\mathscr L} \iff D(\mathscr L) - D(\mathscr L' ) = D(f)$$
+    \end{dem}
+    \begin{cor}
+        $\modulo{Div(A)}{\displaystyle \sum_{f\in \Sigma} D(f)\cdot \bb Z}$
+    \end{cor}
+    \begin{obs}
+        $\mathscr L \subset \Sigma$ f.g. libre de torsi\'on. $(\mathscr L)_\p = t^n \cdot A_\p = \frac{a}{b} \cdot A_\p$ con $n \in \bb Z$ y donde $t$ es generador del ideal $\p \cdot A_\p$, pero $a=ut^r, \, b=\bar u t^s$, por lo que $\frac{a}{b} = u' t^{r-s}=u' t^n$ y $D(\mathscr L) - \sum n_\p \cdot \p$. Por lo que si
+        $$\mathscr L = \p_1^{n_1} \cdots \p_r^{n_r} \cdot (\q_1^*)^{m_1} \cdots (\q_s^*)^{m_s} $$ 
+        entonces su divisor es
+        $$D(\mathscr L) = n_1 \p_1 + \cdots + n_r \p_r - m_1 \q_1 - \cdots - m_s \q_s $$
+    \end{obs}
+    \begin{defi} 
+        $D_1 \ge D_2$ cuando $D_1-D_2 \ge 0$ y $D_1 - D_2 = D(a), \, a\in A$. 
+
+        $D\ge 0$ con $D=D(I)=n_1 \p_1 + \cdots + n_r \p_r $ con $I=\p_1^{n_1} \cdots \p_r^{n_r}, \, n_1, \ldots, n_r \ge 0$.
+
+        $D_1 = D(\mathscr L_1) \ge D(\mathscr L_2)$ si para $\mathscr L_1, \mathscr L_2\subset \Sigma$ se cumple que $\mathscr L_1 \subset \mathscr L_2$. Desallorando
+        $$D_1-D_2 \ge 0 \iff D_1-D_2 = D(\mathscr L_1) - D(\mathscr L_2) = D(\mathscr L_1 \cdot \mathscr L_2^{-1}) \ge 0 \iff \mathscr L_1 \cdot \mathscr L_2^{-1} =I \iff$$
+        $$\iff \mathscr L_1 = I\cdot \mathscr L_2 \iff \mathscr L_1 \subset \mathscr L_2$$ 
+        Y adem\'as 
+        $$\mathscr L_1 = f\cdot \mathscr L_2 \iff \boxed{\mathscr L_1 \simeq \mathscr L_2 \iff D_1 = D_2 + D(f)} \quad f\in \Sigma$$
+
+        Es decir, $Pic(A) = \modulo{Div(Spec\, A)}{\sim}$ siendo $\sim$ que difieren en el divisor de una funci\'on. Esto permite demostrar que $Pic(A)$ es una variedad algebraica. 
+    \end{defi}
+    \begin{prop}
+        Recordemos que dados $I_1, I_2\subset A$, existe $\bar I\subset A$ tal que $\bar I \simeq I_1$ y es primo con $I_2$ ($\bar I + I_2 = A$). 
+    \end{prop}
+    \begin{dem}
+        Ahora lo demotraremos con la teor\'ia de diviores. Dos ideales son primos entre s\'i cuando no tienen divisores comunes, como en $\bb Z$. Sean $D_1, D_2 $ positivos asociados a $I_1,I_2$, se define $sop(D) = \{\p \in Spec\, A \, / \, D = \cdots + n_\p \p + \cdots \}$. Diremos que $D_1$ es primo con $D_2$ cuando $Sop(D_1)\cap Sop(D_2) = \emptyset$. 
+
+        $D\ge 0$ con $D\sim D_1$ y $sop D \cap sop D_2 = \emptyset$. Si $a\in A$ en $D_1$, 
+        $$\nu_x(a) = \begin{cases}
+            \nu_x(D_1) & \text{ si } x\in sop D_1 \\ 0 & \text{ si } x \in sop D_2 - sop D_1  
+        \end{cases}$$
+        entonces $D(a) \ge D_1$, $\bar D = D(a)-D_1 \ge 0$ y adem\'as, $sop D_2 \cap sop \bar D = \emptyset$, 
+        $$D' = D(b) - \bar D \ge 0 \quad \text{ y } \quad sop D_2 \cap sop D' = \emptyset $$
+        y reescribiendo, 
+        $$0 \le D(b) - (D(a)-D_1) = D_1 - D(a) + D(b) = D_1 + D\left(\frac{b}{a}\right) $$
+    \end{dem}
+    \begin{cor}
+        Entonces $M$ descompone como
+        $$M = \bigwedge_A^r \left( \modulo{M}{T(M)} \right) \oplus A^{r-1} \oplus \bigoplus_{\p \in Spec\, A} \left( \modulo{A}{\p^n} \right)^{k_{\p,n}}$$
+        de forma única. Como $T(M)$ es $\modulo{A}{An_A(M)}$-m\'odulo, y por el Teorema chino de los restos, es $\modulo{A}{An_A(M)} = \modulo{A}{\p_1^{n_1}} \times \cdots \times \modulo{A}{\p_r^{n_r}}$ y $T(M) = M_{\p_1}\times \cdots \times  M_{\p_r}$, y si ahora $M$ es $\modulo{A}{\p^n}$-m\'odulo finito generado, 
+        $$M = \bigoplus_{1 \le i \le n} \left( \modulo{A}{\p^i} \right)^{k_i}$$
+        es decir descompone en suma directa de mon\'ogenos, y de forma \'unica. 
+    \end{cor}
+    \begin{dem}
+        [Unicidad] $k_i$ queda determinado porque $\ell \left( \modulo{\p^{n-1} \cdot M }{\p^n \cdot M}\right) = m_n$ es una sucesi\'on y cogemos la diferencia, 
+        $$ d_n(M) = \ell \left( \modulo{\p^{n} \cdot M }{\p^{n+1} \cdot M}\right) + \ell \left( \modulo{\p^{n-1} \cdot M }{\p^n \cdot M}\right) = m_{n+1} + m_n = k_n$$
+        Pues 
+        $$d_n(M) = \sum k_i d_n(A/p^i) = k_n \qquad d_n(A/p^i)\begin{cases}
+            1 & \text{ si } i=n \\ 0 & \text{ si } i\neq n 
+        \end{cases}$$ 
+        $$\p^n \left( \modulo{A}{\p^i} \right) = 0 \text{ si } n \ge i $$
+        pero si $n-1\ge i$, $\ell\left( \modulo{\p^{i-1}}{\p^i} \right)=1$ y si $n \le i$ comprobar que $\ell=1$
+    \end{dem}
